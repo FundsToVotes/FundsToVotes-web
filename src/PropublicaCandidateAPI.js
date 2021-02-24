@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import Dropdown from 'react-dropdown';
 
 // Finding the list of respresentatives for an address and showing a dropdown with a list of them
-export function GoogleAPI() {
+export function GoogleAPI(props) {
     const [officials, setOfficials] = useState([""]);
+    //let addressString = encodeURIComponent(props.address);
+    let addressString = encodeURIComponent('15232 NE 3rd PL Bellevue WA 98007');
     useEffect(() => {
-        fetch("https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=15232%20NE%203rd%20Pl%20Bellevue%20Washington&key=AIzaSyCshtyTCb0erDxK5moA0nU3JT5crT5UWBQ", {
+        fetch("https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=" + addressString + "&key=AIzaSyCshtyTCb0erDxK5moA0nU3JT5crT5UWBQ", {
             method: "GET",
             'Content-Type': 'application/json',
         })
@@ -65,6 +67,15 @@ function oneRepVotes(name) {
                             "X-API-Key": "AYZVqN2QlJkxBhkzZ4JsFd9J3cZG1SuoWNee9QoS"
                         }
                     });
+                }
+            )
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    return fetch("http://www.opensecrets.org/api/?method=candSector&cid=" + crpID + "&cycle=2020&apikey=" + "36b9f9c9066b76213e6f0c51dd12a605" + "&output=json", {
+                        method: "GET"
+                    })
                 }
             )
             .then(res => res.json())
