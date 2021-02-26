@@ -6,7 +6,6 @@ export function LandingPage() {
         <div>
             <Title />
             <AddressInput />
-            <GoogleAPI />
         </div>
     );
 }
@@ -19,24 +18,27 @@ function Title() {
 
 function AddressInput() {
     const [address, setAddress] = useState('');
+    const [submitted, setSubmitted] = useState(false);
 
+    let onSubmit = (e) => {
+        e.preventDefault();
+        setSubmitted(true);
+    }
 
-    return(
-        <div>
-            <form>
-            <label>
-                Address in format "Street City StateFullName Zip" ex 1124 SE 4th ST Seattle Washington 98091:<br/> Address:
-                <input type="text" address="address" onChange={e => setAddress(e.value)}/>
-            </label>
-            <input type="submit" value="submit" onSubmit={e => onSubmit(address)}/>
-        </form>
-        </div>
-    )
+    if(submitted) {
+        return <GoogleAPI address={address}/>
+    } else {
+        return(
+            <div>
+                <form onSubmit={e => onSubmit(e)}>
+                <label>
+                    Address in format "Street City StateFullName Zip" ex 1124 SE 4th ST Seattle Washington 98091:<br/> Address:
+                    <input type="text" address="address" onChange={e => setAddress(e.target.value)}/>
+                </label>
+                <input type="submit" value="submit"/>
+            </form>
+            </div>
+        )
+    }
 }
 
-function onSubmit(address) {
-    console.log("wtf is going on")
-    return(
-        <GoogleAPI address={address}/>
-    );
-}
