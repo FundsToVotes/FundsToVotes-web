@@ -1,4 +1,4 @@
-import { GoogleAPI } from './PropublicaCandidateAPI';
+import { GoogleAPI } from './GoogleAPI';
 import { useState } from 'react';
 
 export function LandingPage() {
