@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Funds to Votes",
+  "name": "A browser based application for displaying the voting records and financial information of Elected Representatives",
   "icons": [
     {
       "src": "favicon.ico",
