@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import "../index.css";
+
 
 
 
@@ -8,7 +10,7 @@ function Header() {
   return (
 
     //Navbar    
-        <Navbar fixed="sticky" bg="light" expand="lg">
+        <Navbar fixed="sticky"  style={{backgroundColor: '#689f38', paddingTop: "0px",}} expand="lg">
           <Navbar.Brand href="/home">Home</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
