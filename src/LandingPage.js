@@ -1,5 +1,6 @@
 import { GoogleAPI } from './GoogleAPI';
 import { useState } from 'react';
+import { MDBInput } from 'mdb-react-ui-kit';
 
 export function LandingPage() {
     return(
@@ -7,6 +8,12 @@ export function LandingPage() {
             <AddressInput />
         </div>
     );
+}
+
+function Title() {
+    return(
+        <h2>Find Your Representative</h2>
+    )
 }
 
 function AddressInput() {

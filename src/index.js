@@ -1,17 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import App from "./App";
+import About from "./Components/StaticPages/about";
+import Finance101 from "./Components/StaticPages/finance101";
+import OurData from "./Components/StaticPages/ourdata"
+import TakeAction from "./Components/StaticPages/takeaction"
+import Notfound from "./Components/StaticPages/notfound";
+import Header from "./Components/header";
+import Footer from "./Components/footer";
+import Banner from "./Components/banner";
+import { LandingPage } from "./LandingPage";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+//My tutorial said to put this here, but my other tutorials said logic
+/////goes in app.js, and components go in index.js, so... ???
+const routing = (
+  <Router>
+    <div>
+      <Banner></Banner>
+      <Header />      <hr />
+
+      <body>
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <Route path="/home" component={LandingPage} />
+        <Route path="/finance101" component={Finance101} />
+        <Route path="/takeaction" component={TakeAction} />
+        <Route path="/ourdata" component={OurData} />
+        <Route path="/about" component={About} />
+        <Route component={Notfound} />
+      </Switch>
+      </body>
+
+      <Footer />    </div>
+  </Router>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(routing, document.getElementById("root"));
