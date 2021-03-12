@@ -10,7 +10,7 @@ function Banner() {
 
     <MDBJumbotron fluid  style={{backgroundColor: '#8bc34a', marginBottom: "0px"}}>
     <MDBContainer>
-      <h2 className="display-4">Funds to Votes</h2>
+      <h1 className="display-4 h2">Funds to Votes</h1>
       <p className="lead">Who funds your representatives?</p>
     </MDBContainer>
   </MDBJumbotron>

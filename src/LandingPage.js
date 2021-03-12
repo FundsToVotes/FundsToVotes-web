@@ -1,5 +1,6 @@
 import { GoogleAPI } from './GoogleAPI';
 import { useState } from 'react';
+import { MDBInput } from 'mdb-react-ui-kit';
 
 export function LandingPage() {
     return(
@@ -12,7 +13,7 @@ export function LandingPage() {
 
 function Title() {
     return(
-        <h1>FundsToVotes</h1>
+        <h2>Find Your Representative</h2>
     )
 }
 

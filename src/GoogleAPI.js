@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Dropdown from 'react-dropdown';
+import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn } from 'mdb-react-ui-kit';
 
 // Finding the list of respresentatives for an address and showing a dropdown with a list of them
 export function GoogleAPI(props) {
     const [officials, setOfficials] = useState([""]);
     let addressString = encodeURIComponent(props.address);
-    //let addressString = encodeURIComponent('15232 NE 3rd PL Bellevue WA 98007');
     useEffect(() => {
         fetch("https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=" + addressString + "&key=AIzaSyCshtyTCb0erDxK5moA0nU3JT5crT5UWBQ", {
             method: "GET",
@@ -33,7 +33,15 @@ export function GoogleAPI(props) {
 
     return (
         <div>
-            <Dropdown options={officials} placeholder='Select a Candidate ..' />
+            {officials.map(name => (
+                <MDBCard>
+                    <MDBCardBody>
+                        <MDBCardTitle tag="h3" className="h5">{name}</MDBCardTitle>
+                        <MDBCardText>U.S. Congress</MDBCardText>
+                        <MDBBtn style={{backgroundColor: "#212121"}} onClick={() => { alert("Coming soon!") }}>Learn More</MDBBtn>
+                    </MDBCardBody>
+                </MDBCard>
+            ))}
         </div>
     )
 }
