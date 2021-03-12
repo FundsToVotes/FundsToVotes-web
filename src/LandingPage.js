@@ -4,16 +4,9 @@ import { useState } from 'react';
 export function LandingPage() {
     return(
         <div>
-            <Title />
             <AddressInput />
         </div>
     );
-}
-
-function Title() {
-    return(
-        <h1>FundsToVotes</h1>
-    )
 }
 
 function AddressInput() {
@@ -32,10 +25,10 @@ function AddressInput() {
             <div>
                 <form onSubmit={e => onSubmit(e)}>
                 <label>
-                    Address in format "Street City StateFullName Zip" ex 1124 SE 4th ST Seattle Washington 98091:<br/> Address:
-                    <input type="text" address="address" onChange={e => setAddress(e.target.value)}/>
+                    <input type="text" placeholder="Insert Address Here" address="address" onChange={e => setAddress(e.target.value)}/>
+                    <input type="submit" value="Search"/><br/>
+                    Format Address as "Street City StateFullName Zip" ex 1124 SE 4th St Seattle Washington 98091
                 </label>
-                <input type="submit" value="submit"/>
             </form>
             </div>
         )
