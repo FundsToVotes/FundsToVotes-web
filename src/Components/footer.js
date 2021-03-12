@@ -3,8 +3,8 @@ import { MDBFooter } from 'mdb-react-ui-kit';
 
 function Footer() {
   return (
-    <MDBFooter backgroundColor='light' className='text-center text-lg-left'  style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-      <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+    <MDBFooter backgroundColor='light' className='text-center text-lg-left'  /*style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}*/>
+      <div className='text-center p-3' /*style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}*/>
         &copy; {new Date().getFullYear()} Through {' '}
         <a className='text-dark' href='https://github.com/FundsToVotes/FundsToVotes-web/blob/main/LICENSE'>
           MIT License

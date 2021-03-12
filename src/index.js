@@ -21,6 +21,7 @@ const routing = (
       <Banner></Banner>
       <Header />      <hr />
 
+      <body>
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route path="/home" component={LandingPage} />
@@ -30,6 +31,7 @@ const routing = (
         <Route path="/about" component={About} />
         <Route component={Notfound} />
       </Switch>
+      </body>
 
       <Footer />    </div>
   </Router>
