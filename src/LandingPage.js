@@ -5,6 +5,7 @@ import { MDBInput } from 'mdb-react-ui-kit';
 export function LandingPage() {
     return(
         <div>
+            <Title />
             <AddressInput />
         </div>
     );
