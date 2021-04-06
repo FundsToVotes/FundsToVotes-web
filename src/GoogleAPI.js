@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Dropdown from 'react-dropdown';
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn } from 'mdb-react-ui-kit';
+import { LandingPage, RepresentativePage } from "./RepresentativePage"
 
 // Finding the list of respresentatives for an address and showing a dropdown with a list of them
 export function GoogleAPI(props) {
@@ -38,7 +39,7 @@ export function GoogleAPI(props) {
                     <MDBCardBody>
                         <MDBCardTitle tag="h3" className="h5">{name}</MDBCardTitle>
                         <MDBCardText>U.S. Congress</MDBCardText>
-                        <MDBBtn style={{backgroundColor: "#212121"}} onClick={() => { alert("Coming soon!") }}>Learn More</MDBBtn>
+                        <MDBBtn style={{backgroundColor: "#212121"}} onClick={() => { return <RepresentativePage /> }}>Learn More</MDBBtn>
                     </MDBCardBody>
                 </MDBCard>
             ))}

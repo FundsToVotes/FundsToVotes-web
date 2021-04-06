@@ -33,9 +33,8 @@ function AddressInput() {
             <div>
                 <form onSubmit={e => onSubmit(e)}>
                 <label>
-                    <input type="text" placeholder="Insert Address Here" address="address" onChange={e => setAddress(e.target.value)}/>
+                    <input type="text" placeholder="Insert Address or Zipcode Here" address="address" onChange={e => setAddress(e.target.value)}/>
                     <input type="submit" value="Search"/><br/>
-                    Format Address as "Street City StateFullName Zip" ex 1124 SE 4th St Seattle Washington 98091
                 </label>
             </form>
             </div>
