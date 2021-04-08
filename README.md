@@ -4,7 +4,7 @@ _Informatics Capstone Project 2021 | University of Washington Information School
 ## Team Members
 - Grady Thompson (Project Manager, Generalist)
 - Jay Houppermans (Backend Developer, Server Administrator)
-- Haykal Mubin (Front-End Developer)
+- Haykal Mubin (Frontend Developer)
 - Reyan Haji (Data Analyst)
 
 ## Contact Information
@@ -13,14 +13,20 @@ Email the project team at hello@fundstovotes.info. Or, create an issue in our Gi
 
 ## Understanding Our Code
 
-We have not yet started coding our app, but we will be developing a single-page React web application. It has been created using `create-react-app`.
+We used `create-react-app` to set up our project.
 
-After cloning the repo to your local machine, install the dependencies. Ensure your terminal is in the `app` directory, then run `npm install`.
+After cloning the repo to your local machine, install the dependencies. To do this, run `npm install`. (This requires that you have Node with npm installed.)
 
 To start your local development server, run `npm start`.
 
-To bundle and build the app for production, run `npm run build`. Please note that we have not established a deployment process, so avoid running this command.
-
 ## Contributing
 
-First, clone the repo to your local machine. All features and improvements (essentially all commits) should be made on a separate branch (not `main`). Push your commits to a branch, then create a pull request. One team member should review and approve your PR, then it can be merged into the `main` branch.
+First, clone the repo to your local machine and follow the steps in the previous section. All features and improvements (essentially all commits) should be made on a separate branch (not `main`). Push your commits to a branch, then create a pull request. One team member should review and approve your PR, then it can be merged into the `main` branch.
+
+## Deployment
+
+We are using [Render](https://render.com) for Static Site Hosting. When a PR is merged into `main`, the site automaticall redeploys. Visit the deployed version at [FundsToVotes.info](https://www.fundstovotes.info).
+
+## Backend/Serverside Code
+
+We have a separate (currently private) repository for our backend/serverside code. It is hosted on an Amazon Web Services (AWS) EC2 instance.

@@ -1,5 +1,5 @@
-import React from 'react'
+import React from 'react';
 
-const Notfound = () => <h1>Not found</h1>
+const NotFound = () => <h2>Not found</h2>
 
-export default Notfound
+export default NotFound;
