@@ -12,6 +12,7 @@ import Header from "./Components/header";
 import Footer from "./Components/footer";
 import Banner from "./Components/banner";
 import { LandingPage } from "./LandingPage";
+import { RepresentativePage } from "./RepresentativePage";
 
 //My tutorial said to put this here, but my other tutorials said logic
 /////goes in app.js, and components go in index.js, so... ???
@@ -29,6 +30,7 @@ const routing = (
         <Route path="/takeaction" component={TakeAction} />
         <Route path="/ourdata" component={OurData} />
         <Route path="/about" component={About} />
+        <Route path="/representativepage" component={RepresentativePage} />
         <Route component={Notfound} />
       </Switch>
       </body>
