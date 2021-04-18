@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import Plot from 'react-plotly.js';
 
 export function RepresentativePage(props) {
     const [industries, setIndustries] = useState([]);
@@ -40,27 +40,23 @@ export function RepresentativePage(props) {
 
 function IndustriesList(props) {
     let industries = props.ind;
-    let industryElem = industries.map((item) => {
-        let elem = <IndustryItem industryObj={item}/>
-        return elem;
-    })
+    let trace1 = {x:[], y:[], name:'Individual', type:'bar', marker:{color:'#90EE90'}}
+    let trace2 = {x:[], y:[], name:'PACs', type:'bar', marker:{color:'#2E8B57'}}
+    for(let i = 0; i < industries.length; i++) {
+        trace1.x[i] = industries[i]['@attributes']['industry_name']
+        trace2.x[i] = industries[i]['@attributes']['industry_name']
+        trace1.y[i] = industries[i]['@attributes']['indivs']
+        trace2.y[i] = industries[i]['@attributes']['pacs']
+    }
+    console.log(trace1);
+    let data = [trace1, trace2];
+
     return(
         <div>
             <h3>Top 10 Industries Funding This Representative</h3>
-            <ol>
-                {industryElem}
-            </ol>
+            <Plot data={data} layout={{barmode:'stack', title:'Top 10 Industries'}}/>
         </div>        
     )
-}
-
-function IndustryItem(props) {
-    let industry = props.industryObj;
-    return(
-        <div>
-            <li>{industry['@attributes']['industry_name']}</li>
-        </div>
-    );
 }
 
 
