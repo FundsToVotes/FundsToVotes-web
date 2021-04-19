@@ -2,7 +2,7 @@ import React from 'react'
 
 class TakeAction extends React.Component {
   render() {
-    return <h1>Take Action</h1>
+    return <h2>Take Action</h2>
   }
 }
 

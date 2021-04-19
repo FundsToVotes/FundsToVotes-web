@@ -1,9 +1,8 @@
 import { GoogleAPI } from './GoogleAPI';
 import { useState } from 'react';
-import { MDBInput } from 'mdb-react-ui-kit';
 
 export function LandingPage() {
-    return(
+    return (
         <div>
             <Title />
             <AddressInput />
@@ -12,7 +11,7 @@ export function LandingPage() {
 }
 
 function Title() {
-    return(
+    return (
         <h2>Find Your Representative</h2>
     )
 }
@@ -26,20 +25,21 @@ function AddressInput() {
         setSubmitted(true);
     }
 
-    if(submitted) {
-        return <GoogleAPI address={address}/>
+    if (submitted) {
+        return <GoogleAPI address={address} />
     } else {
-        return(
+        return (
             <div>
                 <form onSubmit={e => onSubmit(e)}>
-                <label>
-                    <input type="text" placeholder="Insert Address Here" address="address" onChange={e => setAddress(e.target.value)}/>
-                    <input type="submit" value="Search"/><br/>
+                    <label>
+                        <input type="text" placeholder="Insert Address Here" address="address" onChange={e => setAddress(e.target.value)} />
+                        <input type="submit" value="Search" /><br />
                     Format Address as "Street City StateFullName Zip" ex 1124 SE 4th St Seattle Washington 98091
                 </label>
-            </form>
+                </form>
             </div>
         )
     }
 }
 
+export default LandingPage;
