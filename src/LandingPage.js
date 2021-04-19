@@ -1,6 +1,5 @@
 import { GoogleAPI } from './GoogleAPI';
 import { useState } from 'react';
-import { MDBInput } from 'mdb-react-ui-kit';
 
 export function LandingPage() {
     return (

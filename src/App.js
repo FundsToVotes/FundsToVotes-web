@@ -9,6 +9,7 @@ import NotFound from "./Components/StaticPages/NotFound";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import Banner from "./Components/Banner";
+import RepresentativeDetails from "./Components/RepresentativeDetails";
 import LandingPage from "./LandingPage";
 
 import './App.css';
@@ -26,6 +27,7 @@ function App() {
                 <TakeAction path="/take-action" />
                 <OurData path="/our-data" />
                 <About path="/about" />
+                <RepresentativeDetails path="/representative-details" />
                 <NotFound default />
             </Router>
 
