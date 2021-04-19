@@ -19,7 +19,7 @@ import { RepresentativePage } from "./RepresentativePage";
 const routing = (
   <Router>
     <div>
-      <Banner></Banner>
+      
       <Header />      <hr />
 
       <body>
