@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 export function LandingPage() {
     return (
-        <div style={{display: "block", margin: "auto", width: '75%', paddingTop: '50px'}}>
+        <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '50px' }}>
             <Title />
             <AddressInput />
         </div>
@@ -12,9 +12,9 @@ export function LandingPage() {
 
 function Title() {
     return (
-        <div style={{textAlign: 'center'}}>
-            <h2 style={{fontSize: 52, color: '#689f38'}}>Who is Funding Your Representatives?</h2>
-            <p>Enter your Zipcode or Address below to see who funds your representatives and how that might affect their voting</p>
+        <div style={{ textAlign: 'center' }}>
+            <h2 style={{ fontSize: 52, color: '#516F2A' }}>Who Funds Your Representatives?</h2>
+            <p>Enter your Zipcode or Address below to see who funds your representatives and how that might affect their voting.</p>
         </div>
     )
 }
@@ -32,13 +32,14 @@ function AddressInput() {
         return <GoogleAPI address={address} />
     } else {
         return (
-            <div style={{textAlign: 'center'}}>
+            <div style={{ textAlign: 'center' }}>
                 <form onSubmit={e => onSubmit(e)}>
-                <label>
-                    <input style={{width: '600px'}} type="text" placeholder="Insert Address or Zipcode Here" address="address" onChange={e => setAddress(e.target.value)}/>
-                    <input type="submit" value="Search"/><br/>
-                </label>
-            </form>
+                    <label>
+                        <input style={{ width: '600px' }} type="text" placeholder="Insert Address or Zipcode Here" address="address" onChange={e => setAddress(e.target.value)} />
+                        <input type="submit" value="Search" /><br />
+                    </label>
+                </form>
+
             </div>
         )
     }

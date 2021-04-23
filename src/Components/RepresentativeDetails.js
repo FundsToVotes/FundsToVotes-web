@@ -42,7 +42,7 @@ export default function RepresentativePage(props) {
             )
     }, [])
     return (
-        <div>
+        <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '50px' }}>
             <h2>{offName}</h2>
             <h3>Demographic Information</h3>
             <p>Party Affiliation: {offObj.party}</p>
