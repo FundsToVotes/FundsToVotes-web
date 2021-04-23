@@ -8,6 +8,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 export default function RepresentativePage(props) {
     const [industries, setIndustries] = useState([]);
+    const [bills, setBills] = useState([]);
     let offName = props.location.state.currName;
     let officials = props.location.state.off.offList;
     let offObj = '';
@@ -30,6 +31,16 @@ export default function RepresentativePage(props) {
                 }
             )
     }, [])
+    useEffect(() => {
+        fetch('https://api.fundstovotes.info/bills?name=' + encodedName)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    setBills(result.top10IndustriesResponse.results[0]['votes']);
+                }
+            )
+    }, [])
     return (
         <div>
             <h2>{offName}</h2>
@@ -41,6 +52,8 @@ export default function RepresentativePage(props) {
             <h3>Top 10 Industries Funding This Representative</h3>
             <IndustriesChart ind={industries} />
             <IndustriesTextList ind={industries} />
+            <h3>Bills Recently Voted on</h3>
+            <BillsList bil={bills}/>
         </div>
     );
 }
@@ -98,5 +111,64 @@ function IndustryItem(props) {
         <div>
             <li>{industry['@attributes']['industry_name']}</li>
         </div>
+    );
+}
+
+function BillsList(props) {
+    let bills = props.bil;
+    let billsElem = bills.map((item) => {
+        let bill = <BillsItem billObj={item} />
+        return bill;
+    })
+    return (
+        <div>
+            <table>
+                <tbody>
+                <tr style={{
+                border: '3px solid #689f38',
+                padding: '8px',
+                backgroundColor: 'white'
+                }}>
+                    <th style={{
+                border: '3px solid #689f38',
+                padding: '8px'
+                }}>Name</th>
+                    <th style={{
+                border: '3px solid #689f38',
+                padding: '8px'
+                }}>Representative's Position</th>
+                    <th style={{
+                border: '3px solid #689f38',
+                padding: '8px'
+                }}>Industry of Bill</th>
+                </tr>
+                {billsElem}
+                </tbody>
+            </table>
+        </div>
+    )
+}
+
+function BillsItem(props) {
+    let bill = props.billObj;
+    return (
+        <tr style={{
+            border: '3px solid #689f38',
+            padding: '8px',
+            backgroundColor: 'white'
+          }}>
+            <td style={{
+                border: '3px solid #689f38',
+                padding: '8px'
+                }}>{bill.bill.short_title}</td>
+            <td style={{
+                border: '3px solid #689f38',
+                padding: '8px'
+                }}>{bill.position}</td>
+            <td style={{
+                border: '3px solid #689f38',
+                padding: '8px'
+                }}>{bill.bill.Opensecrets_Sector_Long}</td>
+        </tr>
     );
 }
