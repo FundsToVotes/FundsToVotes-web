@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 export function LandingPage() {
     return (
-        <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '50px' }}>
+        <div style={{ display: "block", margin: "auto", width: '75%', padding: '110px' }}>
             <Title />
             <AddressInput />
         </div>

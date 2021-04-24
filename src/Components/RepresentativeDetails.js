@@ -42,12 +42,11 @@ export default function RepresentativePage(props) {
             )
     }, [])
     return (
-        <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '50px' }}>
-            <h2>{offName}</h2>
-            <h3>Demographic Information</h3>
-            <p>Party Affiliation: {offObj.party}</p>
-            <p>Phone Number: {offObj.phones[0]}</p>
-            <p>Website: <a href={offObj.urls[0]}>{offObj.urls[0]}</a></p>
+        <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '50px', backgroundColor: 'white', padding: '50px' }}>
+            <h1>{offName}</h1>
+            <p>{offObj.party}</p>
+            <p>{offObj.phones[0]}</p>
+            <p><a href={offObj.urls[0]}>{offObj.urls[0]}</a></p>
             <img src={offObj.photoUrl} alt="A photograph of the representative" />
             <h3>Top 10 Industries Funding This Representative</h3>
             <IndustriesChart ind={industries} />
