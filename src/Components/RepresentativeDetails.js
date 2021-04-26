@@ -94,12 +94,14 @@ export default function RepresentativePage(props) {
             <div style={{ marginBotton: '20px'}}>
                 <h3>Top 10 Industries Funding This Representative</h3>
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap'}}>
+                <p>These industries are top contributors to {offName}'s campaign by individuals who work in those industries or Political Action Committees (PACs) in that industry.</p>
                     <IndustriesChart ind={industries} />
                     <IndustriesTextList ind={industries} />
                 </div>
             </div>
             <div style={{ marginTop: '20px'}}>
                 <h3>Bills Recently Voted on</h3>
+                <p>These are the recent bills that {offName} has voted on. They industry that the bill relates to may correlate with an industry that supports {offName}.</p>
                 <BillsList bil={bills} ind={listOfInd}/>
             </div>
         </div>
@@ -121,7 +123,7 @@ function IndustriesChart(props) {
 
     return(
         <div>
-            <Plot data={data} layout={{barmode:'stack', title:'Top 10 Industries'}}/>
+            <Plot data={data} layout={{barmode:'stack'}}/>
         </div>        
     )
 

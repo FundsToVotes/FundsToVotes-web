@@ -6,30 +6,33 @@ export function GoogleAPI(props) {
     const [officials, setOfficials] = useState({ nameList:[""], offList:[""] });
     let addressString = encodeURIComponent(props.address);
     useEffect(() => {
-        fetch("https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=" + addressString + "&key=AIzaSyCshtyTCb0erDxK5moA0nU3JT5crT5UWBQ", {
+        fetch("https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=" + addressString + "&key=AIzaSyCshtyTCb0erDxK5moA0nU3JT5crT5UWBQ&levels=country&roles=legislatorUpperBody&roles=legislatorLowerBody", {
             method: "GET",
             'Content-Type': 'application/json',
         })
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result);
-                    let startIndexSen = result['offices'][2]['officialIndices'][0];
-                    let endIndexSen = result['offices'][2]['officialIndices'][result['offices'][2]['officialIndices'].length - 1];
-                    let indexRep = result['offices'][3]['officialIndices'][0];
-                    let offNames = new Array(endIndexSen - startIndexSen + 2);
-                    let listOff = new Array(endIndexSen - startIndexSen + 2);
-                    let tempIndex = 0;
-                    for(let i = startIndexSen; i <= endIndexSen; i++) {
-                        offNames[tempIndex] = result['officials'][i].name;
-                        listOff[tempIndex] = result['officials'][i];
-                        tempIndex++;
+                    if (result["officials"].length === 3) {
+                        let startIndexSen = result['offices'][0]['officialIndices'][0];
+                        let endIndexSen = result['offices'][0]['officialIndices'][result['offices'][0]['officialIndices'].length - 1];
+                        let indexRep = result['offices'][1]['officialIndices'][0];
+                        let offNames = new Array(endIndexSen - startIndexSen + 2);
+                        let listOff = new Array(endIndexSen - startIndexSen + 2);
+                        let tempIndex = 0;
+                        for(let i = startIndexSen; i <= endIndexSen; i++) {
+                            offNames[tempIndex] = result['officials'][i].name;
+                            listOff[tempIndex] = result['officials'][i];
+                            tempIndex++;
+                        }
+                        offNames[offNames.length - 1] = result['officials'][indexRep].name;
+                        listOff[listOff.length - 1] = result['officials'][indexRep];
+                        let officialPlural = {nameList:offNames, offList:listOff}
+                        setOfficials(officialPlural);
+                    } else {
+                        alert("Oops, we can't find the representatives for that location! Please try again using a full street address and ZIP code.");
+                        window.location.reload();
                     }
-                    offNames[offNames.length - 1] = result['officials'][indexRep].name;
-                    listOff[listOff.length - 1] = result['officials'][indexRep];
-                    let officialPlural = {nameList:offNames, offList:listOff}
-                    setOfficials(officialPlural);
-                    console.log(officialPlural);
                 }
             )
     }, [])
