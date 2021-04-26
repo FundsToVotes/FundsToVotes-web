@@ -55,7 +55,7 @@ export default function RepresentativePage(props) {
             </div>
             <div style={{ marginTop: '20px'}}>
                 <h3>Bills Recently Voted on</h3>
-                <p>These are the recent bills that {offName} has voted on. They industry that the bill relates to may correlate with an industry that supports {offName}.</p>
+                <p>These are the recent bills that {offName} has voted on. The industry that the bill relates to may correlate with an industry that supports {offName}.</p>
                 <BillsList bil={bills}/>
             </div>
         </div>
