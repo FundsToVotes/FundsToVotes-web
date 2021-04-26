@@ -42,17 +42,25 @@ export default function RepresentativePage(props) {
             )
     }, [])
     return (
-        <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '50px', backgroundColor: 'white', padding: '50px' }}>
-            <h1>{offName}</h1>
-            <p>{offObj.party}</p>
-            <p>{offObj.phones[0]}</p>
-            <p><a href={offObj.urls[0]}>{offObj.urls[0]}</a></p>
-            <img src={offObj.photoUrl} alt="A photograph of the representative" />
-            <h3>Top 10 Industries Funding This Representative</h3>
-            <IndustriesChart ind={industries} />
-            <IndustriesTextList ind={industries} />
-            <h3>Bills Recently Voted on</h3>
-            <BillsList bil={bills}/>
+        <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '20px', backgroundColor: 'white', padding: '30px', marginTop: '30px'}}>
+            <h1  >{offName}</h1>
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                <p style={{ display: 'inline'}}>{offObj.party}</p>
+                <p style={{ display: 'inline'}}>{offObj.phones[0]}</p>
+                <p style={{ display: 'inline'}}><a href={offObj.urls[0]}>{offObj.urls[0]}</a></p>
+            </div>
+            <img src={offObj.photoUrl} alt="A photograph of the representative" style={{ display: 'none'}}/>
+            <div style={{ marginBotton: '20px'}}>
+                <h3>Top 10 Industries Funding This Representative</h3>
+                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                    <IndustriesChart ind={industries} />
+                    <IndustriesTextList ind={industries} />
+                </div>
+            </div>
+            <div style={{ marginTop: '20px'}}>
+                <h3>Bills Recently Voted on</h3>
+                <BillsList bil={bills}/>
+            </div>
         </div>
     );
 }
@@ -86,20 +94,8 @@ function IndustriesTextList(props) {
     })
     return (
         <div>
-            <Accordion>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                >
-                    <Typography>Text Version of Top 10 Industries</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Typography>
-                        <ol>{industryElem}</ol>
-                    </Typography>
-                </AccordionDetails>
-            </Accordion>
+            <p>Top 10 Industries List</p>
+            <ol>{industryElem}</ol>
         </div>
     )
 }
@@ -124,20 +120,20 @@ function BillsList(props) {
             <table>
                 <tbody>
                 <tr style={{
-                border: '3px solid #689f38',
+                border: '3px solid #516F2A',
                 padding: '8px',
                 backgroundColor: 'white'
                 }}>
                     <th style={{
-                border: '3px solid #689f38',
+                border: '3px solid #516F2A',
                 padding: '8px'
                 }}>Name</th>
                     <th style={{
-                border: '3px solid #689f38',
+                border: '3px solid #516F2A',
                 padding: '8px'
                 }}>Representative's Position</th>
                     <th style={{
-                border: '3px solid #689f38',
+                border: '3px solid #516F2A',
                 padding: '8px'
                 }}>Industry of Bill</th>
                 </tr>
@@ -152,20 +148,20 @@ function BillsItem(props) {
     let bill = props.billObj;
     return (
         <tr style={{
-            border: '3px solid #689f38',
+            border: '3px solid #516F2A',
             padding: '8px',
             backgroundColor: 'white'
           }}>
             <td style={{
-                border: '3px solid #689f38',
+                border: '3px solid #516F2A',
                 padding: '8px'
                 }}>{bill.bill.short_title}</td>
             <td style={{
-                border: '3px solid #689f38',
+                border: '3px solid #516F2A',
                 padding: '8px'
                 }}>{bill.position}</td>
             <td style={{
-                border: '3px solid #689f38',
+                border: '3px solid #516F2A',
                 padding: '8px'
                 }}>{bill.bill.Opensecrets_Sector_Long}</td>
         </tr>
