@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
 import Plot from 'react-plotly.js';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 export default function RepresentativePage(props) {
     const [industries, setIndustries] = useState([]);
@@ -52,6 +47,7 @@ export default function RepresentativePage(props) {
             <img src={offObj.photoUrl} alt="A photograph of the representative" style={{ display: 'none'}}/>
             <div style={{ marginBotton: '20px'}}>
                 <h3>Top 10 Industries Funding This Representative</h3>
+                <p>These industries are top contributors to {offName}'s campaign by individuals who work in those industries or Political Action Committees (PACs) in that industry.</p>
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
                     <IndustriesChart ind={industries} />
                     <IndustriesTextList ind={industries} />
@@ -59,6 +55,7 @@ export default function RepresentativePage(props) {
             </div>
             <div style={{ marginTop: '20px'}}>
                 <h3>Bills Recently Voted on</h3>
+                <p>These are the recent bills that {offName} has voted on. They industry that the bill relates to may correlate with an industry that supports {offName}.</p>
                 <BillsList bil={bills}/>
             </div>
         </div>
