@@ -72,7 +72,7 @@ function IndustriesChart(props) {
 
     return(
         <div>
-            <Plot data={data} layout={{barmode:'stack', title:'Top 10 Industries'}}/>
+            <Plot data={data} layout={{barmode:'stack'}}/>
         </div>        
     )
 
