@@ -88,7 +88,7 @@ export default function RepresentativePage(props) {
                 <p style={{ display: 'inline'}}>{offObj.party}</p>
                 <p style={{ display: 'inline'}}>{typeStyled}</p>
                 <p style={{ display: 'inline'}}>{offObj.phones[0]}</p>
-                <p style={{ display: 'inline'}}><a href={offObj.urls[0]}>{offObj.urls[0]}</a></p>
+                <p style={{ display: 'inline'}}><a href={offObj.urls[0]} target="_blank">{offObj.urls[0]}</a></p>
             </div>
             <img src={offObj.photoUrl} alt="A photograph of the representative" style={{ display: 'none'}}/>
             <div style={{ marginBotton: '20px'}}>
@@ -100,7 +100,7 @@ export default function RepresentativePage(props) {
             </div>
             <div style={{ marginTop: '20px'}}>
                 <h3>Bills Recently Voted on</h3>
-                <BillsList bil={bills} ind={listOfInd}/>
+                <BillsList bil={bills} ind={listOfInd} type={type}/>
             </div>
         </div>
     );
@@ -154,7 +154,7 @@ function BillsList(props) {
     let bills = props.bil;
     let ind = props.ind;
     let billsElem = bills.map((item) => {
-        let bill = <BillsItem billObj={item} indList={ind}/>
+        let bill = <BillsItem billObj={item} indList={ind} type={props.type}/>
         return bill;
     })
     return (
@@ -196,12 +196,13 @@ function BillsItem(props) {
     let ifMatch = '';
     let colorRow = 'white';
     if(ind.includes(bill.bill.Opensecrets_Sector_Long)){
-        ifMatch = 'True'
-        colorRow = 'green'
+        ifMatch = 'True';
+        colorRow = 'green';
     } else {
-        ifMatch = 'False'
+        ifMatch = 'False';
     }
-    
+    let billStubArray = bill.bill.number.split(" ");
+    let website = 'https://www.congress.gov/bill/117th-congress/' + props.type + '-bill/' + billStubArray[billStubArray.length - 1];
     return (
         <tr style={{
             border: '3px solid #516F2A',
@@ -211,7 +212,7 @@ function BillsItem(props) {
             <td style={{
                 border: '3px solid #516F2A',
                 padding: '8px'
-                }}><a href={bill.vote_uri}>{bill.bill.short_title}</a></td>
+                }}><a href={website} target="_blank">{bill.bill.short_title}</a></td>
             <td style={{
                 border: '3px solid #516F2A',
                 padding: '8px'
