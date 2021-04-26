@@ -45,6 +45,8 @@ export default function RepresentativePage(props) {
         type = 'house';
         typeStyled = 'Representative of the House'
     }
+    /*
+    INDEPENDENT EXPENDITURES CODE
     useEffect(() => {
         fetch("https://api.propublica.org/congress/v1/116/" + type + "/members.json", {
             method: "GET",
@@ -76,9 +78,11 @@ export default function RepresentativePage(props) {
                 }
             )
     }, [])
+    */
     let listOfInd = industries.map((item) => {
         return item['@attributes']['industry_name'];
     })
+
     return (
         <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '20px', backgroundColor: 'white', padding: '30px', marginTop: '30px'}}>
             <h1  >{offName}</h1>
@@ -99,10 +103,6 @@ export default function RepresentativePage(props) {
             <div style={{ marginTop: '20px'}}>
                 <h3>Bills Recently Voted on</h3>
                 <BillsList bil={bills} ind={listOfInd}/>
-            </div>
-            <div style={{ display: "none", marginTop: '20px'}}>
-                <h3>Independent Expenditures</h3>
-                <ExpendituresPie exp={expenditures}/>
             </div>
         </div>
     );
@@ -229,6 +229,7 @@ function BillsItem(props) {
         </tr>
     );
 }
+
 
 function ExpendituresPie(props) {
     let exp = props.exp;
