@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 export function LandingPage() {
     return (
-        <div>
+        <div style={{ display: "block", margin: "auto", width: '75%', padding: '110px' }}>
             <Title />
             <AddressInput />
         </div>
@@ -12,7 +12,10 @@ export function LandingPage() {
 
 function Title() {
     return (
-        <h2>Find Your Representative</h2>
+        <div style={{ textAlign: 'center' }}>
+            <h2 style={{ fontSize: 52, color: '#516F2A' }}>Who Funds Your Representatives?</h2>
+            <p>Enter your Zipcode or Address below to see who funds your representatives and how that might affect their voting.</p>
+        </div>
     )
 }
 
@@ -29,14 +32,14 @@ function AddressInput() {
         return <GoogleAPI address={address} />
     } else {
         return (
-            <div>
+            <div style={{ textAlign: 'center' }}>
                 <form onSubmit={e => onSubmit(e)}>
                     <label>
-                        <input type="text" placeholder="Insert Address Here" address="address" onChange={e => setAddress(e.target.value)} />
+                        <input style={{ width: '600px' }} type="text" placeholder="Insert Address or Zipcode Here" address="address" onChange={e => setAddress(e.target.value)} />
                         <input type="submit" value="Search" /><br />
-                    Format Address as "Street City StateFullName Zip" ex 1124 SE 4th St Seattle Washington 98091
-                </label>
+                    </label>
                 </form>
+
             </div>
         )
     }

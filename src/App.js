@@ -5,6 +5,7 @@ import About from "./Components/StaticPages/About";
 import Finance101 from "./Components/StaticPages/Finance101";
 import OurData from "./Components/StaticPages/OurData";
 import TakeAction from "./Components/StaticPages/TakeAction";
+import PrivacyPolicy from "./Components/StaticPages/PrivacyPolicy";
 import NotFound from "./Components/StaticPages/NotFound";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
@@ -18,7 +19,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
     return (
         <div>
-            <Banner />
             <Header />
 
             <Router>
@@ -28,6 +28,7 @@ function App() {
                 <OurData path="/our-data" />
                 <About path="/about" />
                 <RepresentativeDetails path="/representative-details" />
+                <PrivacyPolicy path="/privacy-policy" />
                 <NotFound default />
             </Router>
 

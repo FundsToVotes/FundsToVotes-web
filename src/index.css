@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding-bottom: 220px; 
-  background-color: #DCEDC8 !important;
+  background-color: #dcedc8b2 !important;
 
 }
 /*header stuff styled in the components for now */
@@ -16,7 +16,7 @@ Footer {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 220px;
+  height: 100px;
   background-color: #9e9e9e;
   }
 
