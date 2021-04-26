@@ -101,12 +101,7 @@ export default function RepresentativePage(props) {
             </div>
             <div style={{ marginTop: '20px'}}>
                 <h3>Bills Recently Voted on</h3>
-<<<<<<< HEAD
                 <BillsList bil={bills} ind={listOfInd} type={type}/>
-=======
-                <p>These are the recent bills that {offName} has voted on. They industry that the bill relates to may correlate with an industry that supports {offName}.</p>
-                <BillsList bil={bills} ind={listOfInd}/>
->>>>>>> 85c2b255a41503e7c3688f1ab1b9877bc76e0141
             </div>
         </div>
     );
