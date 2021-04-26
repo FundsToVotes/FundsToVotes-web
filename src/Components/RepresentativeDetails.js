@@ -4,6 +4,7 @@ import Plot from 'react-plotly.js';
 export default function RepresentativePage(props) {
     const [industries, setIndustries] = useState([]);
     const [bills, setBills] = useState([]);
+    const [expenditures, setExpenditures] = useState([]);
     let offName = props.location.state.currName;
     let officials = props.location.state.off.offList;
     let offObj = '';
@@ -14,7 +15,6 @@ export default function RepresentativePage(props) {
         }
     }
     let arrToEncode = offName.split(" ", 2);
-    console.log(arrToEncode);
     let encodedName = arrToEncode[1] + ',' + arrToEncode[0];
     useEffect(() => {
         fetch('https://api.fundstovotes.info/topten?name=' + encodedName)
@@ -36,19 +36,65 @@ export default function RepresentativePage(props) {
                 }
             )
     }, [])
+    let fecID = '';
+    let type = 'senate';
+    let typeStyled = 'US Senator';
+    if(offObj['urls'][0].includes('house')) {
+        type = 'house';
+        typeStyled = 'Representative of the House'
+    }
+    /*
+    INDEPENDENT EXPENDITURES CODE
+    useEffect(() => {
+        fetch("https://api.propublica.org/congress/v1/116/" + type + "/members.json", {
+            method: "GET",
+            headers: {
+                "X-API-Key": "AYZVqN2QlJkxBhkzZ4JsFd9J3cZG1SuoWNee9QoS"
+            }
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    let nameArray = offName.split(" ");
+                    let offFName = nameArray[0];
+                    let offLName = nameArray[nameArray.length - 1];
+                    let indexOfOfficial = result['results'][0]['members'].findIndex(x => x.first_name === offFName & x.last_name === offLName);
+                    fecID = result['results'][0]['members'][indexOfOfficial]['fec_candidate_id'];
+                    return fetch("https://api.propublica.org/campaign-finance/v1/2018/candidates/" + fecID + "/independent_expenditures.json", {
+                        method: "GET",
+                        headers: {
+                            "X-API-Key": "5iobKpLWaETmRxThCRRqj0MTbCMrMpieHvZ3I7Ex"
+                        }
+                    });
+                }
+            )
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    setExpenditures(result);
+                }
+            )
+    }, [])
+    */
+    let listOfInd = industries.map((item) => {
+        return item['@attributes']['industry_name'];
+    })
+
     return (
         <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '20px', backgroundColor: 'white', padding: '30px', marginTop: '30px'}}>
             <h1  >{offName}</h1>
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                 <p style={{ display: 'inline'}}>{offObj.party}</p>
+                <p style={{ display: 'inline'}}>{typeStyled}</p>
                 <p style={{ display: 'inline'}}>{offObj.phones[0]}</p>
-                <p style={{ display: 'inline'}}><a href={offObj.urls[0]}>{offObj.urls[0]}</a></p>
+                <p style={{ display: 'inline'}}><a href={offObj.urls[0]} target="_blank">{offObj.urls[0]}</a></p>
             </div>
             <img src={offObj.photoUrl} alt="A photograph of the representative" style={{ display: 'none'}}/>
             <div style={{ marginBotton: '20px'}}>
                 <h3>Top 10 Industries Funding This Representative</h3>
+                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap'}}>
                 <p>These industries are top contributors to {offName}'s campaign by individuals who work in those industries or Political Action Committees (PACs) in that industry.</p>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
                     <IndustriesChart ind={industries} />
                     <IndustriesTextList ind={industries} />
                 </div>
@@ -56,7 +102,7 @@ export default function RepresentativePage(props) {
             <div style={{ marginTop: '20px'}}>
                 <h3>Bills Recently Voted on</h3>
                 <p>These are the recent bills that {offName} has voted on. The industry that the bill relates to may correlate with an industry that supports {offName}.</p>
-                <BillsList bil={bills}/>
+                <BillsList bil={bills} ind={listOfInd} type={type}/>
             </div>
         </div>
     );
@@ -108,8 +154,9 @@ function IndustryItem(props) {
 
 function BillsList(props) {
     let bills = props.bil;
+    let ind = props.ind;
     let billsElem = bills.map((item) => {
-        let bill = <BillsItem billObj={item} />
+        let bill = <BillsItem billObj={item} indList={ind} type={props.type}/>
         return bill;
     })
     return (
@@ -133,6 +180,10 @@ function BillsList(props) {
                 border: '3px solid #516F2A',
                 padding: '8px'
                 }}>Industry of Bill</th>
+                <th style={{
+                border: '3px solid #516F2A',
+                padding: '8px'
+                }}>Industry and Funding Match</th>
                 </tr>
                 {billsElem}
                 </tbody>
@@ -143,16 +194,27 @@ function BillsList(props) {
 
 function BillsItem(props) {
     let bill = props.billObj;
+    let ind = props.indList;
+    let ifMatch = '';
+    let colorRow = 'white';
+    if(ind.includes(bill.bill.Opensecrets_Sector_Long)){
+        ifMatch = 'True';
+        colorRow = 'green';
+    } else {
+        ifMatch = 'False';
+    }
+    let billStubArray = bill.bill.number.split(" ");
+    let website = 'https://www.congress.gov/bill/117th-congress/' + props.type + '-bill/' + billStubArray[billStubArray.length - 1];
     return (
         <tr style={{
             border: '3px solid #516F2A',
             padding: '8px',
-            backgroundColor: 'white'
+            backgroundColor: colorRow
           }}>
             <td style={{
                 border: '3px solid #516F2A',
                 padding: '8px'
-                }}>{bill.bill.short_title}</td>
+                }}><a href={website} target="_blank">{bill.bill.short_title}</a></td>
             <td style={{
                 border: '3px solid #516F2A',
                 padding: '8px'
@@ -161,6 +223,24 @@ function BillsItem(props) {
                 border: '3px solid #516F2A',
                 padding: '8px'
                 }}>{bill.bill.Opensecrets_Sector_Long}</td>
+            <td style={{
+                border: '3px solid #516F2A',
+                padding: '8px'
+                }}>{ifMatch}</td>
         </tr>
     );
 }
+
+
+//function ExpendituresPie(props) {
+//    let exp = props.exp;
+ //   let data = [{
+//        values: [exp.oppose_total, exp.support_total],
+ //       labels: ['Total Funding Opposing Representative', 'Total Funding Supporting Representative'],
+  //      type: 'pie',
+  //      marker:{color:['#2E8B57', '#90EE90']}
+  //  }]
+   // return (
+ //       <Plot data={data} layout={{height: 400,width: 500}}/>
+  //  );
+//}
