@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@reach/router";
 import { MDBFooter } from 'mdb-react-ui-kit';
 
 function Footer() {
@@ -7,7 +8,7 @@ function Footer() {
             <div className='text-center p-3' /*style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}*/>
                 <p style = {{ color: "black" }}>Developed by students at the <a href="https://ischool.uw.edu" style={{ color: "#212121" }}>University of Washington Information School</a>.</p>
                 <p>
-                    <a href='https://github.com/FundsToVotes/FundsToVotes-web/blob/main/LICENSE' style={{ color: "#212121" }}>MIT License</a> | <a href='https://github.com/FundsToVotes/FundsToVotes-web' style={{ color: "#212121" }}                     > GitHub</a>
+                    <a href='https://github.com/FundsToVotes/FundsToVotes-web/blob/main/LICENSE' style={{ color: "#212121" }}>MIT License</a> | <a href='https://github.com/FundsToVotes/FundsToVotes-web' style={{ color: "#212121" }}>GitHub</a> | <Link to="/privacy-policy" style={{ color: "#212121" }}>Privacy Policy</Link>
                 </p>
                 {/* <p>Funds to Votes recieves its data from publicly available sources, and makes no claims regarding the accuracy thereof.</p>
                 <p> Funds To Votes is a nonpartisan organization, and doesn't work for the benefit or loss of any specific candidates</p>
