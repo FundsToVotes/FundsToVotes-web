@@ -1,5 +1,3 @@
-import { PieChart } from "@material-ui/icons";
-import { plot } from "plotly.js";
 import { useEffect, useState } from "react";
 import Plot from 'react-plotly.js';
 
@@ -231,15 +229,15 @@ function BillsItem(props) {
 }
 
 
-function ExpendituresPie(props) {
-    let exp = props.exp;
-    let data = [{
-        values: [exp.oppose_total, exp.support_total],
-        labels: ['Total Funding Opposing Representative', 'Total Funding Supporting Representative'],
-        type: 'pie',
-        marker:{color:['#2E8B57', '#90EE90']}
-    }]
-    return (
-        <Plot data={data} layout={{height: 400,width: 500}}/>
-    );
-}
+//function ExpendituresPie(props) {
+//    let exp = props.exp;
+ //   let data = [{
+//        values: [exp.oppose_total, exp.support_total],
+ //       labels: ['Total Funding Opposing Representative', 'Total Funding Supporting Representative'],
+  //      type: 'pie',
+  //      marker:{color:['#2E8B57', '#90EE90']}
+  //  }]
+   // return (
+ //       <Plot data={data} layout={{height: 400,width: 500}}/>
+  //  );
+//}
