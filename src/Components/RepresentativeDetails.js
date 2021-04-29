@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Plot from 'react-plotly.js';
 
 export default function RepresentativePage(props) {
-    const [industries, setIndustries] = useState([]);
+    const [industries, setIndustries] = useState({industry:[], '@attributes':{cid: ''}});
     const [bills, setBills] = useState([]);
     const [expenditures, setExpenditures] = useState([]);
     let offName = props.location.state.currName;
@@ -22,7 +22,7 @@ export default function RepresentativePage(props) {
             .then(
                 (result) => {
                     console.log(result);
-                    setIndustries(result.top10IndustriesResponse.industry);
+                    setIndustries(result.top10IndustriesResponse);
                 }
             )
     }, [])
@@ -77,17 +77,21 @@ export default function RepresentativePage(props) {
             )
     }, [])
     */
-    let listOfInd = industries.map((item) => {
-        return item['@attributes']['industry_name'];
+    let listOfInd = industries.industry.map((item) => {
+        return item['@attributes']['industry_code'];
     })
+    let partyColor = 'red';
+    if(offObj.party === 'Democratic Party'){
+        partyColor = 'blue';
+    }
 
     return (
         <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '20px', backgroundColor: 'white', padding: '30px', marginTop: '30px'}}>
             <h1  >{offName}</h1>
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                <p style={{ display: 'inline'}}>{offObj.party}</p>
+                <p style={{ display: 'inline', color: partyColor}}>{offObj.party}</p>
                 <p style={{ display: 'inline'}}>{typeStyled}</p>
-                <p style={{ display: 'inline'}}>{offObj.phones[0]}</p>
+                <p style={{ display: 'inline'}}>DC Office: {offObj.phones[0]}</p>
                 <p style={{ display: 'inline'}}><a href={offObj.urls[0]} target="_blank">{offObj.urls[0]}</a></p>
             </div>
             <img src={offObj.photoUrl} alt="A photograph of the representative" style={{ display: 'none'}}/>
@@ -95,14 +99,21 @@ export default function RepresentativePage(props) {
                 <h3>Top 10 Industries Funding This Representative</h3>
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap'}}>
                 <p>These industries are top contributors to {offName}'s campaign by individuals who work in those industries or Political Action Committees (PACs) in that industry.</p>
-                    <IndustriesChart ind={industries} />
-                    <IndustriesTextList ind={industries} />
+                    <IndustriesChart ind={industries.industry} />
+                    <IndustriesTextList ind={industries.industry} />
                 </div>
             </div>
             <div style={{ marginTop: '20px'}}>
                 <h3>Bills Recently Voted on</h3>
                 <p>These are the recent bills that {offName} has voted on. The industry that the bill relates to may correlate with an industry that supports {offName}.</p>
                 <BillsList bil={bills} ind={listOfInd} type={type}/>
+            </div>
+            <div style={{ marginTop: '20px'}}>
+                <h3>Find Out More About {offName}'s Funding</h3>
+                <ExtendedInfoOnRep cid={industries['@attributes']['cid']} name={offName} />
+            </div>
+            <div style={{ marginTop: '20px', textAlign: 'center'}}>
+                <button style={{ backgroundColor: 'green', padding: '10px', borderRadius: '8px'}}><h3><a href='/take-action' style={{ color: 'white'}}>Ready to act? Click Here to Take Action!</a></h3></button>
             </div>
         </div>
     );
@@ -123,7 +134,7 @@ function IndustriesChart(props) {
 
     return(
         <div>
-            <Plot data={data} layout={{barmode:'stack'}}/>
+            <Plot data={data} layout={{barmode:'stack'}} config={{displayModeBar: false}} />
         </div>        
     )
 
@@ -183,6 +194,10 @@ function BillsList(props) {
                 <th style={{
                 border: '3px solid #516F2A',
                 padding: '8px'
+                }}>Bill Summary</th>
+                <th style={{
+                border: '3px solid #516F2A',
+                padding: '8px'
                 }}>Industry and Funding Match</th>
                 </tr>
                 {billsElem}
@@ -195,14 +210,15 @@ function BillsList(props) {
 function BillsItem(props) {
     let bill = props.billObj;
     let ind = props.indList;
-    let ifMatch = '';
+    let ifMatch = 'False';
     let colorRow = 'white';
-    if(ind.includes(bill.bill.Opensecrets_Sector_Long)){
-        ifMatch = 'True';
-        colorRow = 'green';
-    } else {
-        ifMatch = 'False';
+    for(let i = 0; i < ind.length; i++) {
+        if(ind[i].startsWith(bill.bill.Opensecrets_Sector_Prefix)){
+            ifMatch = 'True';
+            colorRow = '#dcedc8b2';
+        }
     }
+
     let billStubArray = bill.bill.number.split(" ");
     let website = 'https://www.congress.gov/bill/117th-congress/' + props.type + '-bill/' + billStubArray[billStubArray.length - 1];
     return (
@@ -226,8 +242,25 @@ function BillsItem(props) {
             <td style={{
                 border: '3px solid #516F2A',
                 padding: '8px'
+                }}>{bill.bill.summary_short}</td>
+            <td style={{
+                border: '3px solid #516F2A',
+                padding: '8px'
                 }}>{ifMatch}</td>
         </tr>
+    );
+}
+
+function ExtendedInfoOnRep(props) {
+    let openSecretsLink = 'https://www.opensecrets.org/members-of-congress/'+  props.name.replace(' ', '-') + '/summary?cid=' + props.cid;
+    let voterlyLink = 'https://voterly.com/search/politicians?q=' + props.name.replace(' ', '-');
+    return (
+        <div>
+            <ul>
+                <li><a href={openSecretsLink} target="_blank">Open Secrets Page</a></li>
+                <li><a href={voterlyLink} target="_blank">Voterly Page</a></li>
+            </ul>
+        </div>
     );
 }
 
