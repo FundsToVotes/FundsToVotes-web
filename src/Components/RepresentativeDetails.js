@@ -44,7 +44,7 @@ export default function RepresentativePage(props) {
         typeStyled = 'Representative of the House'
     }
     useEffect(() => {
-        fetch("https://api.propublica.org/congress/v1/116/" + type + "/members.json", {
+        fetch("https://api.propublica.org/congress/v1/117/" + type + "/members.json", {
             method: "GET",
             headers: {
                 "X-API-Key": "AYZVqN2QlJkxBhkzZ4JsFd9J3cZG1SuoWNee9QoS"
@@ -58,7 +58,14 @@ export default function RepresentativePage(props) {
                     let offLName = nameArray[nameArray.length - 1];
                     let indexOfOfficial = result['results'][0]['members'].findIndex(x => x.first_name === offFName & x.last_name === offLName);
                     fecID = result['results'][0]['members'][indexOfOfficial]['fec_candidate_id'];
-                    return fetch("https://api.propublica.org/campaign-finance/v1/2018/candidates/" + fecID + "/independent_expenditures.json", {
+                    let senClass = result['results'][0]['members'][indexOfOfficial]['title'];
+                    let senClassYr = "2020";
+                    if(senClass.includes("1st Class")) {
+                        senClassYr = "2018";
+                    } else if (senClass.includes("3rd Class")) {
+                        senClassYr = "2016";
+                    }
+                    return fetch("https://api.propublica.org/campaign-finance/v1/" + senClassYr + "/candidates/" + fecID + "/independent_expenditures.json", {
                         method: "GET",
                         headers: {
                             "X-API-Key": "5iobKpLWaETmRxThCRRqj0MTbCMrMpieHvZ3I7Ex"
