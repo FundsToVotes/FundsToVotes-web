@@ -4,7 +4,7 @@ import Plot from 'react-plotly.js';
 export default function RepresentativePage(props) {
     const [industries, setIndustries] = useState({industry:[], '@attributes':{cid: ''}});
     const [bills, setBills] = useState([]);
-    const [expenditures, setExpenditures] = useState([]);
+    const [expenditures, setExpenditures] = useState({results: []});
     let offName = props.location.state.currName;
     let officials = props.location.state.off.offList;
     let offObj = '';
@@ -43,8 +43,6 @@ export default function RepresentativePage(props) {
         type = 'house';
         typeStyled = 'Representative of the House'
     }
-    /*
-    INDEPENDENT EXPENDITURES CODE
     useEffect(() => {
         fetch("https://api.propublica.org/congress/v1/116/" + type + "/members.json", {
             method: "GET",
@@ -76,7 +74,6 @@ export default function RepresentativePage(props) {
                 }
             )
     }, [])
-    */
     let listOfInd = industries.industry.map((item) => {
         return item['@attributes']['industry_code'];
     })
@@ -107,6 +104,10 @@ export default function RepresentativePage(props) {
                 <h3>Bills Recently Voted on</h3>
                 <p>These are the recent bills that {offName} has voted on. The industry that the bill relates to may correlate with an industry that supports {offName}.</p>
                 <BillsList bil={bills} ind={listOfInd} type={type}/>
+            </div>
+            <div style={{ marginTop: '20px'}}>
+                <h3>{offName}'s Independent Expenditures</h3>
+                <ExpendituresPie exp={expenditures} />
             </div>
             <div style={{ marginTop: '20px'}}>
                 <h3>Find Out More About {offName}'s Funding</h3>
@@ -265,15 +266,50 @@ function ExtendedInfoOnRep(props) {
 }
 
 
-//function ExpendituresPie(props) {
-//    let exp = props.exp;
- //   let data = [{
-//        values: [exp.oppose_total, exp.support_total],
- //       labels: ['Total Funding Opposing Representative', 'Total Funding Supporting Representative'],
-  //      type: 'pie',
-  //      marker:{color:['#2E8B57', '#90EE90']}
-  //  }]
-   // return (
- //       <Plot data={data} layout={{height: 400,width: 500}}/>
-  //  );
-//}
+function ExpendituresPie(props) {
+    let exp = props.exp;
+    console.log(exp);
+    let comitteesS = [];
+    let committeesO = [];
+    for(let i = 0; i < exp.results.length; i++) {
+        if(exp.results[i].support_or_oppose === 'S' && !comitteesS.includes(exp.results[i].fec_committee_name)) {
+            comitteesS.push(exp.results[i].fec_committee_name);
+        } else if(exp.results[i].support_or_oppose === 'O' && !committeesO.includes(exp.results[i].fec_committee_name)) {
+            committeesO.push(exp.results[i].fec_committee_name);
+        }
+    }
+    if(comitteesS.length === 0) {
+        comitteesS.push('No Committees Found');
+    }
+    if(committeesO.length === 0) {
+        committeesO.push('No Committees Found');
+    }
+    let listOfS = comitteesS.map((item) => {
+        return <ExpenditureListItem committee={item}/>
+    })
+    let listOfO = committeesO.map((item) => {
+        return <ExpenditureListItem committee={item}/>
+    })
+    return (
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap'}}>
+            <div>
+                <p>Committees That Support Representative:</p>
+                <ul>
+                    {listOfS}
+                </ul>
+            </div>
+            <div>
+                <p>Committees That Donated Against Representative:</p>
+                <ul>
+                    {listOfO}
+                </ul>
+            </div>
+        </div>
+    );
+}
+
+function ExpenditureListItem(props) {
+    return (
+        <li>{props.committee}</li>
+    )
+}
