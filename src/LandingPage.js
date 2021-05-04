@@ -14,7 +14,7 @@ function Title() {
     return (
         <div style={{ textAlign: 'center' }}>
             <h2 style={{ fontSize: 52, color: '#516F2A' }}>Who Funds Your Representatives?</h2>
-            <p>Enter your Zipcode or Address below to see who funds your representatives and how that might affect their voting.</p>
+            <p>Enter your Address below to see who funds your representatives and how that might affect their voting.</p>
         </div>
     )
 }
@@ -35,7 +35,7 @@ function AddressInput() {
             <div style={{ textAlign: 'center' }}>
                 <form onSubmit={e => onSubmit(e)}>
                     <label>
-                        <input style={{ width: '600px' }} type="text" placeholder="Insert Address or Zipcode Here" address="address" onChange={e => setAddress(e.target.value)} />
+                        <input style={{ width: '600px' }} type="text" placeholder="Insert Address Here" address="address" onChange={e => setAddress(e.target.value)} />
                         <input type="submit" value="Search" /><br />
                     </label>
                 </form>
