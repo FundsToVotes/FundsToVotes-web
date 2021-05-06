@@ -19,6 +19,21 @@ After cloning the repo to your local machine, install the dependencies. To do th
 
 To start your local development server, run `npm start`.
 
+## API Keys
+
+To use this application, you need to obtain API Keys for: 
+
+- [Google Civic Information API](https://developers.google.com/civic-information/docs/using_api#APIKey)
+- [ProPublica Congress API](https://www.propublica.org/datastore/api/propublica-congress-api)
+- [ProPublica Campaign Finance API](https://www.propublica.org/datastore/api/campaign-finance-api)
+
+Store them in a file called `.env` at the root of your cloned repository. It should look like this before you fill in your keys:
+```
+REACT_APP_GOOGLE_API_KEY = 
+REACT_APP_PROPUBLICA_CAMPAIGN_FINANCE_API_KEY = 
+REACT_APP_PROPUBLICA_CONGRESS_API_KEY = 
+```
+
 ## Contributing
 
 First, clone the repo to your local machine and follow the steps in the previous section. All features and improvements (essentially all commits) should be made on a separate branch (not `main`). Push your commits to a branch, then create a pull request. One team member should review and approve your PR, then it can be merged into the `main` branch.
