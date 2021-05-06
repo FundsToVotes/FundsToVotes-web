@@ -29,9 +29,9 @@ To use this application, you need to obtain API Keys for:
 
 Store them in a file called `.env` at the root of your cloned repository. It should look like this before you fill in your keys:
 ```
-REACT_APP_GOOGLE_API_KEY = 
-REACT_APP_PROPUBLICA_CAMPAIGN_FINANCE_API_KEY = 
-REACT_APP_PROPUBLICA_CONGRESS_API_KEY = 
+REACT_APP_GOOGLE_API_KEY=
+REACT_APP_PROPUBLICA_CAMPAIGN_FINANCE_API_KEY=
+REACT_APP_PROPUBLICA_CONGRESS_API_KEY=
 ```
 
 ## Contributing

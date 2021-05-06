@@ -47,7 +47,7 @@ export default function RepresentativePage(props) {
         fetch("https://api.propublica.org/congress/v1/117/" + type + "/members.json", {
             method: "GET",
             headers: {
-                "X-API-Key": process.env.PROPUBLICA_CONGRESS_API_KEY
+                "X-API-Key": process.env.REACT_APP_PROPUBLICA_CONGRESS_API_KEY
             }
         })
             .then(res => res.json())
@@ -68,7 +68,7 @@ export default function RepresentativePage(props) {
                     return fetch("https://api.propublica.org/campaign-finance/v1/" + senClassYr + "/candidates/" + fecID + "/independent_expenditures.json", {
                         method: "GET",
                         headers: {
-                            "X-API-Key": process.env.PROPUBLICA_CAMPAIGN_FINANCE_API_KEY
+                            "X-API-Key": process.env.REACT_APP_PROPUBLICA_CAMPAIGN_FINANCE_API_KEY
                         }
                     });
                 }
