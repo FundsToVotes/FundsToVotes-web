@@ -1,5 +1,6 @@
 import { GoogleAPI } from './GoogleAPI';
 import { useState } from 'react';
+import { Link } from '@reach/router';
 
 export function LandingPage() {
     return (
@@ -37,6 +38,7 @@ function AddressInput() {
                     <label>
                         <input style={{ width: '600px' }} type="text" placeholder="Insert Address Here" address="address" onChange={e => setAddress(e.target.value)} />
                         <input type="submit" value="Search" /><br />
+                        <p>We don't save your information. See our <Link to="/privacy-policy">Privacy Policy</Link>.</p>
                     </label>
                 </form>
 

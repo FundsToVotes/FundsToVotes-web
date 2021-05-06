@@ -3,7 +3,7 @@ import React from 'react'
 class Finance101 extends React.Component {
     render() {
         return (
-            <div style={{ display: "block", margin: "auto", width: '75%', padding: '110px' }}>
+            <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '20px', backgroundColor: 'white', padding: '30px', marginTop: '30px' }}>
                 <h2>Campaign Finance 101</h2>
                 <em>This information applies to elections for federal offices. Other rules apply for state and local elections.</em>
                 <br/><br/>
