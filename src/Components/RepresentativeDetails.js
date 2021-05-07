@@ -278,9 +278,18 @@ function ExpendituresPie(props) {
     console.log(exp);
     let comitteesS = [];
     let committeesO = [];
+    let trace1 = {x:[], y:[], name:'Donated Supporting Representative', type:'bar', marker:{color:'#90EE90'}}
     for(let i = 0; i < exp.results.length; i++) {
-        if(exp.results[i].support_or_oppose === 'S' && !comitteesS.includes(exp.results[i].fec_committee_name)) {
-            comitteesS.push(exp.results[i].fec_committee_name);
+        if(exp.results[i].support_or_oppose === 'S') {
+            if(!comitteesS.includes(exp.results[i].fec_committee_name)) {
+                comitteesS.push(exp.results[i].fec_committee_name);
+            }
+            if(!trace1.x.includes(exp.results[i].fec_committee_name)) {
+                trace1.x.push(exp.results[i].fec_committee_name);
+                trace1.y.push(exp.results[i].amount);
+            } else {
+                let sumOfAmount = trace1.y
+            }
         } else if(exp.results[i].support_or_oppose === 'O' && !committeesO.includes(exp.results[i].fec_committee_name)) {
             committeesO.push(exp.results[i].fec_committee_name);
         }
