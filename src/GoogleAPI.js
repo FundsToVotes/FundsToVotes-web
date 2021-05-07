@@ -6,7 +6,7 @@ export function GoogleAPI(props) {
     const [officials, setOfficials] = useState({ nameList:[""], offList:[""] });
     let addressString = encodeURIComponent(props.address);
     useEffect(() => {
-        fetch("https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=" + addressString + "&key=AIzaSyCshtyTCb0erDxK5moA0nU3JT5crT5UWBQ&levels=country&roles=legislatorUpperBody&roles=legislatorLowerBody", {
+        fetch("https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=" + addressString + "&key=" + process.env.REACT_APP_GOOGLE_API_KEY + "&levels=country&roles=legislatorUpperBody&roles=legislatorLowerBody", {
             method: "GET",
             'Content-Type': 'application/json',
         })
