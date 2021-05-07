@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import Plot from 'react-plotly.js';
+import { Icon } from '@iconify/react';
+import externalLink from '@iconify-icons/feather/external-link';
+
 
 export default function RepresentativePage(props) {
     const [industries, setIndustries] = useState({industry:[], '@attributes':{cid: ''}});
@@ -26,17 +29,8 @@ export default function RepresentativePage(props) {
                 }
             )
     }, [])
-    useEffect(() => {
-        fetch('https://api.fundstovotes.info/bills?name=' + encodedName)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    console.log(result);
-                    setBills(result.top10IndustriesResponse.results[0]['votes']);
-                }
-            )
-    }, [])
     let fecID = '';
+    let memberID = '';
     let type = 'senate';
     let typeStyled = 'US Senator';
     if(offObj['urls'][0].includes('house')) {
@@ -57,6 +51,7 @@ export default function RepresentativePage(props) {
                     let offFName = nameArray[0];
                     let offLName = nameArray[nameArray.length - 1];
                     let indexOfOfficial = result['results'][0]['members'].findIndex(x => x.first_name === offFName & x.last_name === offLName);
+                    memberID = result['results'][0]['members'][indexOfOfficial]['id'];
                     fecID = result['results'][0]['members'][indexOfOfficial]['fec_candidate_id'];
                     let senClass = result['results'][0]['members'][indexOfOfficial]['title'];
                     let senClassYr = "2020";
@@ -78,6 +73,14 @@ export default function RepresentativePage(props) {
                 (result) => {
                     console.log(result);
                     setExpenditures(result);
+                    return fetch('https://api.fundstovotes.info/billstest?member_id=' + memberID);
+                }
+            )
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    setBills(result['votes']);
                 }
             )
     }, [])
@@ -96,7 +99,7 @@ export default function RepresentativePage(props) {
                 <p style={{ display: 'inline', color: partyColor}}>{offObj.party}</p>
                 <p style={{ display: 'inline'}}>{typeStyled}</p>
                 <p style={{ display: 'inline'}}>DC Office: {offObj.phones[0]}</p>
-                <p style={{ display: 'inline'}}><a href={offObj.urls[0]} target="_blank">{offObj.urls[0]}</a></p>
+                <p style={{ display: 'inline'}}><a href={offObj.urls[0]} target="_blank">{offObj.urls[0]} <Icon icon={externalLink} /></a></p>
             </div>
             <img src={offObj.photoUrl} alt="A photograph of the representative" style={{ display: 'none'}}/>
             <div style={{ marginBotton: '20px'}}>
@@ -228,6 +231,9 @@ function BillsItem(props) {
     }
 
     let billStubArray = bill.bill.number.split(" ");
+    if(billStubArray[billStubArray.length - 1].includes('.')) {
+        billStubArray = billStubArray[billStubArray.length - 1].split(".");
+    }
     let website = 'https://www.congress.gov/bill/117th-congress/' + props.type + '-bill/' + billStubArray[billStubArray.length - 1];
     return (
         <tr style={{
@@ -238,7 +244,7 @@ function BillsItem(props) {
             <td style={{
                 border: '3px solid #516F2A',
                 padding: '8px'
-                }}><a href={website} target="_blank">{bill.bill.short_title}</a></td>
+                }}><a href={website} target="_blank">{bill.bill.short_title} <Icon icon={externalLink} /></a></td>
             <td style={{
                 border: '3px solid #516F2A',
                 padding: '8px'
@@ -265,8 +271,8 @@ function ExtendedInfoOnRep(props) {
     return (
         <div>
             <ul>
-                <li><a href={openSecretsLink} target="_blank">Open Secrets Page</a></li>
-                <li><a href={voterlyLink} target="_blank">Voterly Page</a></li>
+                <li><a href={openSecretsLink} target="_blank">Open Secrets Page <Icon icon={externalLink} /></a></li>
+                <li><a href={voterlyLink} target="_blank">Voterly Page <Icon icon={externalLink} /></a></li>
             </ul>
         </div>
     );
@@ -275,30 +281,40 @@ function ExtendedInfoOnRep(props) {
 
 function ExpendituresPie(props) {
     let exp = props.exp;
-    console.log(exp);
     let comitteesS = [];
     let committeesO = [];
-    let trace1 = {x:[], y:[], name:'Donated Supporting Representative', type:'bar', marker:{color:'#90EE90'}}
+    let orgToAmount1 = {};
+    let orgToAmount2 = {};
     for(let i = 0; i < exp.results.length; i++) {
         if(exp.results[i].support_or_oppose === 'S') {
             if(!comitteesS.includes(exp.results[i].fec_committee_name)) {
                 comitteesS.push(exp.results[i].fec_committee_name);
-            }
-            if(!trace1.x.includes(exp.results[i].fec_committee_name)) {
-                trace1.x.push(exp.results[i].fec_committee_name);
-                trace1.y.push(exp.results[i].amount);
+                orgToAmount1[exp.results[i].fec_committee_name] = Number(exp.results[i].amount);
             } else {
-                let sumOfAmount = trace1.y
+                let sumOfAmount = orgToAmount1[exp.results[i].fec_committee_name] + Number(exp.results[i].amount);
+                orgToAmount1[exp.results[i].fec_committee_name] = sumOfAmount;
             }
-        } else if(exp.results[i].support_or_oppose === 'O' && !committeesO.includes(exp.results[i].fec_committee_name)) {
-            committeesO.push(exp.results[i].fec_committee_name);
+        } else if(exp.results[i].support_or_oppose === 'O') {
+            if(!committeesO.includes(exp.results[i].fec_committee_name)) {
+                committeesO.push(exp.results[i].fec_committee_name);
+                orgToAmount2[exp.results[i].fec_committee_name] = Number(exp.results[i].amount);
+            } else {
+                let sumOfAmount = orgToAmount2[exp.results[i].fec_committee_name] + Number(exp.results[i].amount);
+                orgToAmount2[exp.results[i].fec_committee_name] = sumOfAmount;
+            }
         }
     }
+    let trace1 = {x:Object.keys(orgToAmount1), y:Object.values(orgToAmount1), type:'bar', marker:{color:'#2E8B57'}};
+    let trace2 = {x:Object.keys(orgToAmount2), y:Object.values(orgToAmount2), type:'bar', marker:{color:'#2E8B57'}};
+    let display1 = 'flex';
+    let display2 = 'flex';
     if(comitteesS.length === 0) {
         comitteesS.push('No Committees Found');
+        display1 = 'none';
     }
     if(committeesO.length === 0) {
         committeesO.push('No Committees Found');
+        display2 = 'none';
     }
     let listOfS = comitteesS.map((item) => {
         return <ExpenditureListItem committee={item}/>
@@ -319,6 +335,12 @@ function ExpendituresPie(props) {
                 <ul>
                     {listOfO}
                 </ul>
+            </div>
+            <div style={{ display: display1}}>
+            <Plot  data={[trace1]} config={{displayModeBar: false}} layout={ { title: 'Committees Supporting Representative'}}/>
+            </div>
+            <div style={{ display: display2}}>
+            <Plot data={[trace2]} config={{displayModeBar: false}} layout={ { title: 'Committees Against Representative'}}/>
             </div>
         </div>
     );
