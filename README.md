@@ -81,4 +81,8 @@ We are using [Render](https://render.com) for Static Site Hosting. When a PR is 
 
 ## Backend/Serverside Code
 
-We have a separate (currently private) repository for our backend/serverside code. It is hosted on an Amazon Web Services (AWS) EC2 instance.
+We have a separate (currently private) repository for our backend/serverside code. Our serverside code is written in Go, and can be found here - https://github.com/FundsToVotes/serverside. Extensive documentation for the backend of this project can also be found in this repo. 
+
+Our project's backend hosting includes a database and a custom API endpoint serving data accumulated through a variety of sources. This is currently being hosted on an Amason Web Services (AWS) EC2 instance under the FundsToVotes AWS acount. 
+
+Instructions for modifying, running, and acquiring access credentials for the backend server can be found in the Serverside repo. 
