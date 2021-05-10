@@ -45,3 +45,12 @@ We are using [Render](https://render.com) for Static Site Hosting. When a PR is 
 ## Backend/Serverside Code
 
 We have a separate (currently private) repository for our backend/serverside code. It is hosted on an Amazon Web Services (AWS) EC2 instance.
+
+## Project File Architecture 
+
+These are the main files for our website and what they do:
+
+- 'App.js' : Defines the routing for our site, also responsible for calling the header and footer components
+- 'LandingPage.js' : Creates the page users first see with the Search bar and calls the 'GoogleAPI.js' file if the user presses the search button. The inputted address is sent to the 'GoogleAPI.js' file when the search button is pressed. 
+- 'GoogleAPI.js' : Responsible for calling the Google Civic Information API and creating a list of Congress members for the inputted address. When a representative is selected, the 'RepresentativeDetails.js' file is called sending information from the Google API about the selected representative
+- 'RepresentativeDetails.js' : Builds the page sharing the Voting Records, Top 10 Funding Industries, and Independent Expenditures of the selected representative by using representative information to make API calls. Makes API calls to ProPublica Congress API, ProPublica Campaign Finance API, and indirectly calls OpenSecrets through a backend fetch statement. 
