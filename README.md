@@ -79,10 +79,19 @@ First, clone the repo to your local machine and follow the steps in the previous
 
 We are using [Render](https://render.com) for Static Site Hosting. When a PR is merged into `main`, the site automaticall redeploys. Visit the deployed version at [FundsToVotes.info](https://www.fundstovotes.info).
 
+## Project File Architecture 
+
+These are the main files for our website and what they do:
+
+- 'App.js' : Defines the routing for our site, also responsible for calling the header and footer components
+- 'LandingPage.js' : Creates the page users first see with the Search bar and calls the 'GoogleAPI.js' file if the user presses the search button. The inputted address is sent to the 'GoogleAPI.js' file when the search button is pressed. 
+- 'GoogleAPI.js' : Responsible for calling the Google Civic Information API and creating a list of Congress members for the inputted address. When a representative is selected, the 'RepresentativeDetails.js' file is called sending information from the Google API about the selected representative
+- 'RepresentativeDetails.js' : Builds the page sharing the Voting Records, Top 10 Funding Industries, and Independent Expenditures of the selected representative by using representative information to make API calls. Makes API calls to ProPublica Congress API, ProPublica Campaign Finance API, and indirectly calls OpenSecrets through a backend fetch statement. 
+
 ## Backend/Serverside Code
 
 We have a separate (currently private) repository for our backend/serverside code. Our serverside code is written in Go, and can be found here - https://github.com/FundsToVotes/serverside. Extensive documentation for the backend of this project can also be found in this repo. 
 
 Our project's backend hosting includes a database and a custom API endpoint serving data accumulated through a variety of sources. This is currently being hosted on an Amason Web Services (AWS) EC2 instance under the FundsToVotes AWS acount. 
 
-Instructions for modifying, running, and acquiring access credentials for the backend server can be found in the Serverside repo. 
+Instructions for modifying, running, and acquiring access credentials for the backend server can be found in the Serverside repo.
