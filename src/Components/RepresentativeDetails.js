@@ -1,9 +1,17 @@
+/* ****************************************************
+      
+    This file is responsible for creating the representative details page
+    with three visualizations: Top 10 Industries, Bills Table, and Independent Expenditures
+
+*****************************************************/
+
+
 import { useEffect, useState } from "react";
 import Plot from 'react-plotly.js';
 import { Icon } from '@iconify/react';
 import externalLink from '@iconify-icons/feather/external-link';
 
-
+// Renders the Representative Page with the three visualizations 
 export default function RepresentativePage(props) {
     const [industries, setIndustries] = useState({industry:[], '@attributes':{cid: ''}});
     const [bills, setBills] = useState([]);
@@ -130,6 +138,7 @@ export default function RepresentativePage(props) {
     );
 }
 
+// Top 10 Industries: Builds up the Industries Bar Chart
 function IndustriesChart(props) {
     let industries = props.ind;
     let trace1 = {x:[], y:[], name:'Individual', type:'bar', marker:{color:'#90EE90'}}
@@ -151,6 +160,7 @@ function IndustriesChart(props) {
 
 }
 
+// Top 10 Industries: Method to create list of Top 10 Industries
 function IndustriesTextList(props) {
     let industries = props.ind;
     let industryElem = industries.map((item) => {
@@ -165,8 +175,28 @@ function IndustriesTextList(props) {
     )
 }
 
+// Top 10 Industries: Helper method that makes the individual Industry list item
 function IndustryItem(props) {
     let industry = props.industryObj;
+    console.log()
+    let companyEx = {
+        "Health": ['CVS Health Corp', 'UnitedHealth Group Inc.'],
+        "Joint Candidate Cmtes": [],
+        "Ideology/Single-Issue": [],
+        "Labor": [],
+        "Defense": [],
+        "Transportation": [],
+        "Construction": [],
+        "Agribusiness": [],
+        "Energy/Nat Resource": [],
+        "Other": [],
+        "Communic/Electronics": [],
+        "Misc Business": [],
+        "Unknown": [],
+        "Misc Business": [],
+        "Finance/Insur/RealEst": [],
+        "Lawyers & Lobbyists": []
+    }
     return (
         <div>
             <li>{industry['@attributes']['industry_name']}</li>
@@ -174,6 +204,7 @@ function IndustryItem(props) {
     );
 }
 
+// Bills Table: Creates the table for the bills for the specific representative
 function BillsList(props) {
     let bills = props.bil;
     let ind = props.ind;
@@ -218,6 +249,7 @@ function BillsList(props) {
     )
 }
 
+// Bills Table: Creates each individual row of the bills
 function BillsItem(props) {
     let bill = props.billObj;
     let ind = props.indList;
@@ -265,56 +297,39 @@ function BillsItem(props) {
     );
 }
 
+// Responsible for the creation of links to other resources about the other representitive
 function ExtendedInfoOnRep(props) {
     let openSecretsLink = 'https://www.opensecrets.org/members-of-congress/'+  props.name.replace(' ', '-') + '/summary?cid=' + props.cid;
     let voterlyLink = 'https://voterly.com/search/politicians?q=' + props.name.replace(' ', '-');
+    let govTrackLink = 'https://www.govtrack.us/search?q=' + props.name.replace(' ', '-');
     return (
         <div>
             <ul>
                 <li><a href={openSecretsLink} target="_blank">Open Secrets Page <Icon icon={externalLink} /></a></li>
                 <li><a href={voterlyLink} target="_blank">Voterly Page <Icon icon={externalLink} /></a></li>
+                <li><a href={govTrackLink} target="_blank">GovTrack  <Icon icon={externalLink} /></a></li>
             </ul>
         </div>
     );
 }
 
-
+// Independent Expenditures: Creates the list of committees that have supported or donated against a certain representative 
 function ExpendituresPie(props) {
     let exp = props.exp;
     let comitteesS = [];
     let committeesO = [];
-    let orgToAmount1 = {};
-    let orgToAmount2 = {};
     for(let i = 0; i < exp.results.length; i++) {
-        if(exp.results[i].support_or_oppose === 'S') {
-            if(!comitteesS.includes(exp.results[i].fec_committee_name)) {
-                comitteesS.push(exp.results[i].fec_committee_name);
-                orgToAmount1[exp.results[i].fec_committee_name] = Number(exp.results[i].amount);
-            } else {
-                let sumOfAmount = orgToAmount1[exp.results[i].fec_committee_name] + Number(exp.results[i].amount);
-                orgToAmount1[exp.results[i].fec_committee_name] = sumOfAmount;
-            }
-        } else if(exp.results[i].support_or_oppose === 'O') {
-            if(!committeesO.includes(exp.results[i].fec_committee_name)) {
-                committeesO.push(exp.results[i].fec_committee_name);
-                orgToAmount2[exp.results[i].fec_committee_name] = Number(exp.results[i].amount);
-            } else {
-                let sumOfAmount = orgToAmount2[exp.results[i].fec_committee_name] + Number(exp.results[i].amount);
-                orgToAmount2[exp.results[i].fec_committee_name] = sumOfAmount;
-            }
+        if(exp.results[i].support_or_oppose === 'S' & !comitteesS.includes(exp.results[i].fec_committee_name)) {
+            comitteesS.push(exp.results[i].fec_committee_name);
+        } else if(exp.results[i].support_or_oppose === 'O' & !committeesO.includes(exp.results[i].fec_committee_name)) {
+            committeesO.push(exp.results[i].fec_committee_name);
         }
     }
-    let trace1 = {x:Object.keys(orgToAmount1), y:Object.values(orgToAmount1), type:'bar', marker:{color:'#2E8B57'}};
-    let trace2 = {x:Object.keys(orgToAmount2), y:Object.values(orgToAmount2), type:'bar', marker:{color:'#2E8B57'}};
-    let display1 = 'flex';
-    let display2 = 'flex';
     if(comitteesS.length === 0) {
         comitteesS.push('No Committees Found');
-        display1 = 'none';
     }
     if(committeesO.length === 0) {
         committeesO.push('No Committees Found');
-        display2 = 'none';
     }
     let listOfS = comitteesS.map((item) => {
         return <ExpenditureListItem committee={item}/>
@@ -336,16 +351,11 @@ function ExpendituresPie(props) {
                     {listOfO}
                 </ul>
             </div>
-            <div style={{ display: display1}}>
-            <Plot  data={[trace1]} config={{displayModeBar: false}} layout={ { title: 'Committees Supporting Representative'}}/>
-            </div>
-            <div style={{ display: display2}}>
-            <Plot data={[trace2]} config={{displayModeBar: false}} layout={ { title: 'Committees Against Representative'}}/>
-            </div>
         </div>
     );
 }
 
+// Independent Expenditures: Creates the individual list items for Independent Expenditures List
 function ExpenditureListItem(props) {
     return (
         <li>{props.committee}</li>

@@ -1,3 +1,10 @@
+/* ****************************************************
+      
+    This file is responsible for building the site and defining the routing
+    also where the header,footer, and navbar are called
+
+*****************************************************/
+
 import React from 'react';
 import { Router } from "@reach/router";
 
@@ -9,7 +16,6 @@ import PrivacyPolicy from "./Components/StaticPages/PrivacyPolicy";
 import NotFound from "./Components/StaticPages/NotFound";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
-import Banner from "./Components/Banner";
 import RepresentativeDetails from "./Components/RepresentativeDetails";
 import LandingPage from "./LandingPage";
 

@@ -1,3 +1,9 @@
+/* ****************************************************
+      
+    This file is responsible for creating the Our Data Page with a Information about our data sources
+
+*****************************************************/
+
 import React from "react";
 import OpenSecretsLogo from "../../images/OpenSecrets_logo.gif";
 import ProPublicaLogo from "../../images/ProPublica-monogram-color.svg";
