@@ -1,6 +1,6 @@
 /* ****************************************************
       
-    This file is responsible for creating the Our Data Page with a Information about our data sources
+    This file is responsible for creating the Our Data Page with Information about our data sources
 
 *****************************************************/
 

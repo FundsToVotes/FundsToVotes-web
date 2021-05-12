@@ -112,8 +112,8 @@ export default function RepresentativePage(props) {
             <img src={offObj.photoUrl} alt="A photograph of the representative" style={{ display: 'none'}}/>
             <div style={{ marginBotton: '20px'}}>
                 <h3>Top 10 Industries Funding This Representative</h3>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap'}}>
                 <p>These industries are top contributors to {offName}'s campaign by individuals who work in those industries or Political Action Committees (PACs) in that industry.</p>
+                <div style={{ display: 'flex', flexDirection: 'row'}}>
                     <IndustriesChart ind={industries.industry} />
                     <IndustriesTextList ind={industries.industry} />
                 </div>
@@ -149,7 +149,6 @@ function IndustriesChart(props) {
         trace1.y[i] = industries[i]['@attributes']['indivs']
         trace2.y[i] = industries[i]['@attributes']['pacs']
     }
-    console.log(trace1);
     let data = [trace1, trace2];
 
     return(
@@ -178,28 +177,27 @@ function IndustriesTextList(props) {
 // Top 10 Industries: Helper method that makes the individual Industry list item
 function IndustryItem(props) {
     let industry = props.industryObj;
-    console.log()
     let companyEx = {
-        "Health": ['CVS Health Corp', 'UnitedHealth Group Inc.'],
-        "Joint Candidate Cmtes": [],
-        "Ideology/Single-Issue": [],
-        "Labor": [],
-        "Defense": [],
-        "Transportation": [],
-        "Construction": [],
-        "Agribusiness": [],
-        "Energy/Nat Resource": [],
-        "Other": [],
-        "Communic/Electronics": [],
-        "Misc Business": [],
-        "Unknown": [],
-        "Misc Business": [],
-        "Finance/Insur/RealEst": [],
-        "Lawyers & Lobbyists": []
+        "H": 'Kaiser Permanente, Pfizer Inc',
+        "Z": 'Other Candidates',
+        "Q": 'One Nation, Fund for Policy Reform',
+        "P": 'National Education Assn, Carpenters & Joiners Union',
+        "D": 'Lockheed Martin, Raytheon Technologies',
+        "M": 'Boeing Co, Delta Air Lines',
+        "C": 'Suffolk Construction, National Assn of Home Builders',
+        "A": 'British American Tobacco, American Crystal Sugar',
+        "E": 'Chevron Corp, American Petroleum Institute',
+        "W": 'University of California, Marcus Foundation',
+        "C": 'Microsoft Corp, Amazon.com',
+        "Y": 'Unknown',
+        "N": 'Walmart Inc, Las Vegas Sands',
+        "F": 'Bloomberg Lp, Fahr LLC/Tom Steyer',
+        "K": 'Kirkland & Ellis, Paul, Weiss et al'
     }
     return (
         <div>
-            <li>{industry['@attributes']['industry_name']}</li>
+            <li className='hoverIndustry'>{industry['@attributes']['industry_name']}</li>
+            <p className='hideExamples'>Example Organizations: {companyEx[industry['@attributes']['industry_code'].split('')[0]]}</p>
         </div>
     );
 }
