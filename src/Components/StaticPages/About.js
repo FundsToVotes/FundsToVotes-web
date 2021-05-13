@@ -1,3 +1,9 @@
+/* ****************************************************
+      
+    This file is responsible for creating the About page with Information about our project
+
+*****************************************************/
+
 import React from "react";
 import Poster from "../../images/poster.svg";
 

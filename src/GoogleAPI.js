@@ -1,7 +1,15 @@
+/* ****************************************************
+      
+    This file is responsible for creating the List of Representatives through an API call with
+    buttons that when selected renders the RepresentativeDetails Page for that Representative
+
+*****************************************************/
+
 import { useEffect, useState } from "react";
 import { navigate } from '@reach/router';
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn } from 'mdb-react-ui-kit';
 
+// Makes the Google API Call and returns a card list of representative that when selected render a RepresentativeDetails page for the selected representative
 export function GoogleAPI(props) {
     const [officials, setOfficials] = useState({ nameList:[""], offList:[""] });
     let addressString = encodeURIComponent(props.address);

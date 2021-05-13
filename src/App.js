@@ -1,3 +1,10 @@
+/* ****************************************************
+      
+    This file is responsible for building the site and defining the routing
+    also where the header,footer, and navbar are called
+
+*****************************************************/
+
 import React from 'react';
 import { Router } from "@reach/router";
 
