@@ -15,7 +15,7 @@ function Title() {
     return (
         <div style={{ textAlign: 'center' }}>
             <h2 style={{ fontSize: 52, color: '#516F2A' }}>Who Funds Your Representatives?</h2>
-            <p>Enter your Address below to see who funds your representatives and how that might affect their voting.</p>
+            <p>Enter your address below to what industries are donating to your representatives and how they voted on relevant issues.</p>
         </div>
     )
 }
@@ -41,7 +41,6 @@ function AddressInput() {
                         <p>We don't save your information. See our <Link to="/privacy-policy">Privacy Policy</Link>.</p>
                     </label>
                 </form>
-
             </div>
         )
     }

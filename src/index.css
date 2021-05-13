@@ -18,15 +18,19 @@ Footer {
   /* Set the fixed height of the footer here */
   height: 100px;
   background-color: #9e9e9e;
-  }
+}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-    
+/* a[target="_blank"] {
+  background: url(images/external-link.png) center right no-repeat;
+  padding-right: 13px;
 }
 
 a[target="_blank"]:after {
-  content: " (external)";
-}
-
+  content: "(opens in new tab)";
+  position: absolute;
+  left:-10000px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;  
+} */
