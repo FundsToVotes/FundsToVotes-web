@@ -1,7 +1,15 @@
+/* ****************************************************
+      
+    This file is responsible for creating the Landing page with a 
+    search bar that when submitted renders the Representative List on GoogleAPI.js
+
+*****************************************************/
+
 import { GoogleAPI } from './GoogleAPI';
 import { useState } from 'react';
 import { Link } from '@reach/router';
 
+// Renders the Landing Page
 export function LandingPage() {
     return (
         <div style={{ display: "block", margin: "auto", width: '75%', padding: '110px' }}>
@@ -11,6 +19,7 @@ export function LandingPage() {
     );
 }
 
+// Creates the Title for the landing page
 function Title() {
     return (
         <div style={{ textAlign: 'center' }}>
@@ -20,6 +29,7 @@ function Title() {
     )
 }
 
+// Creates the Search bar where users will input their Address, GoogleAPI.js is called when submitted
 function AddressInput() {
     const [address, setAddress] = useState('');
     const [submitted, setSubmitted] = useState(false);

@@ -1,6 +1,17 @@
+/* ****************************************************
+      
+    This file is responsible for creating the representative details page
+    with three visualizations: Top 10 Industries, Bills Table, and Independent Expenditures
+
+*****************************************************/
+
+
 import { useEffect, useState } from "react";
 import Plot from 'react-plotly.js';
+import { Icon } from '@iconify/react';
+import externalLink from '@iconify-icons/feather/external-link';
 
+// Renders the Representative Page with the three visualizations 
 export default function RepresentativePage(props) {
     const [industries, setIndustries] = useState({industry:[], '@attributes':{cid: ''}});
     const [bills, setBills] = useState([]);
@@ -26,17 +37,8 @@ export default function RepresentativePage(props) {
                 }
             )
     }, [])
-    useEffect(() => {
-        fetch('https://api.fundstovotes.info/bills?name=' + encodedName)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    console.log(result);
-                    setBills(result.top10IndustriesResponse.results[0]['votes']);
-                }
-            )
-    }, [])
     let fecID = '';
+    let memberID = '';
     let type = 'senate';
     let typeStyled = 'US Senator';
     if(offObj['urls'][0].includes('house')) {
@@ -57,6 +59,7 @@ export default function RepresentativePage(props) {
                     let offFName = nameArray[0];
                     let offLName = nameArray[nameArray.length - 1];
                     let indexOfOfficial = result['results'][0]['members'].findIndex(x => x.first_name === offFName & x.last_name === offLName);
+                    memberID = result['results'][0]['members'][indexOfOfficial]['id'];
                     fecID = result['results'][0]['members'][indexOfOfficial]['fec_candidate_id'];
                     let senClass = result['results'][0]['members'][indexOfOfficial]['title'];
                     let senClassYr = "2020";
@@ -78,6 +81,14 @@ export default function RepresentativePage(props) {
                 (result) => {
                     console.log(result);
                     setExpenditures(result);
+                    return fetch('https://api.fundstovotes.info/billstest?member_id=' + memberID);
+                }
+            )
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    setBills(result['votes']);
                 }
             )
     }, [])
@@ -96,13 +107,13 @@ export default function RepresentativePage(props) {
                 <p style={{ display: 'inline', color: partyColor}}>{offObj.party}</p>
                 <p style={{ display: 'inline'}}>{typeStyled}</p>
                 <p style={{ display: 'inline'}}>DC Office: {offObj.phones[0]}</p>
-                <p style={{ display: 'inline'}}><a href={offObj.urls[0]} target="_blank">{offObj.urls[0]}</a></p>
+                <p style={{ display: 'inline'}}><a href={offObj.urls[0]} target="_blank">{offObj.urls[0]} <Icon icon={externalLink} /></a></p>
             </div>
             <img src={offObj.photoUrl} alt="A photograph of the representative" style={{ display: 'none'}}/>
             <div style={{ marginBotton: '20px'}}>
                 <h3>Top 10 Industries Funding This Representative</h3>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap'}}>
                 <p>These industries are top contributors to {offName}'s campaign by individuals who work in those industries or Political Action Committees (PACs) in that industry.</p>
+                <div style={{ display: 'flex', flexDirection: 'row'}}>
                     <IndustriesChart ind={industries.industry} />
                     <IndustriesTextList ind={industries.industry} />
                 </div>
@@ -127,6 +138,7 @@ export default function RepresentativePage(props) {
     );
 }
 
+// Top 10 Industries: Builds up the Industries Bar Chart
 function IndustriesChart(props) {
     let industries = props.ind;
     let trace1 = {x:[], y:[], name:'Individual', type:'bar', marker:{color:'#90EE90'}}
@@ -137,7 +149,6 @@ function IndustriesChart(props) {
         trace1.y[i] = industries[i]['@attributes']['indivs']
         trace2.y[i] = industries[i]['@attributes']['pacs']
     }
-    console.log(trace1);
     let data = [trace1, trace2];
 
     return(
@@ -148,6 +159,7 @@ function IndustriesChart(props) {
 
 }
 
+// Top 10 Industries: Method to create list of Top 10 Industries
 function IndustriesTextList(props) {
     let industries = props.ind;
     let industryElem = industries.map((item) => {
@@ -162,15 +174,35 @@ function IndustriesTextList(props) {
     )
 }
 
+// Top 10 Industries: Helper method that makes the individual Industry list item
 function IndustryItem(props) {
     let industry = props.industryObj;
+    let companyEx = {
+        "H": 'Kaiser Permanente, Pfizer Inc',
+        "Z": 'Other Candidates',
+        "Q": 'One Nation, Fund for Policy Reform',
+        "P": 'National Education Assn, Carpenters & Joiners Union',
+        "D": 'Lockheed Martin, Raytheon Technologies',
+        "M": 'Boeing Co, Delta Air Lines',
+        "C": 'Suffolk Construction, National Assn of Home Builders',
+        "A": 'British American Tobacco, American Crystal Sugar',
+        "E": 'Chevron Corp, American Petroleum Institute',
+        "W": 'University of California, Marcus Foundation',
+        "C": 'Microsoft Corp, Amazon.com',
+        "Y": 'Unknown',
+        "N": 'Walmart Inc, Las Vegas Sands',
+        "F": 'Bloomberg Lp, Fahr LLC/Tom Steyer',
+        "K": 'Kirkland & Ellis, Paul, Weiss et al'
+    }
     return (
         <div>
-            <li>{industry['@attributes']['industry_name']}</li>
+            <li className='hoverIndustry'>{industry['@attributes']['industry_name']}</li>
+            <p className='hideExamples'>Example Organizations: {companyEx[industry['@attributes']['industry_code'].split('')[0]]}</p>
         </div>
     );
 }
 
+// Bills Table: Creates the table for the bills for the specific representative
 function BillsList(props) {
     let bills = props.bil;
     let ind = props.ind;
@@ -215,6 +247,7 @@ function BillsList(props) {
     )
 }
 
+// Bills Table: Creates each individual row of the bills
 function BillsItem(props) {
     let bill = props.billObj;
     let ind = props.indList;
@@ -228,6 +261,9 @@ function BillsItem(props) {
     }
 
     let billStubArray = bill.bill.number.split(" ");
+    if(billStubArray[billStubArray.length - 1].includes('.')) {
+        billStubArray = billStubArray[billStubArray.length - 1].split(".");
+    }
     let website = 'https://www.congress.gov/bill/117th-congress/' + props.type + '-bill/' + billStubArray[billStubArray.length - 1];
     return (
         <tr style={{
@@ -238,7 +274,7 @@ function BillsItem(props) {
             <td style={{
                 border: '3px solid #516F2A',
                 padding: '8px'
-                }}><a href={website} target="_blank">{bill.bill.short_title}</a></td>
+                }}><a href={website} target="_blank">{bill.bill.short_title} <Icon icon={externalLink} /></a></td>
             <td style={{
                 border: '3px solid #516F2A',
                 padding: '8px'
@@ -259,29 +295,31 @@ function BillsItem(props) {
     );
 }
 
+// Responsible for the creation of links to other resources about the other representitive
 function ExtendedInfoOnRep(props) {
     let openSecretsLink = 'https://www.opensecrets.org/members-of-congress/'+  props.name.replace(' ', '-') + '/summary?cid=' + props.cid;
     let voterlyLink = 'https://voterly.com/search/politicians?q=' + props.name.replace(' ', '-');
+    let govTrackLink = 'https://www.govtrack.us/search?q=' + props.name.replace(' ', '-');
     return (
         <div>
             <ul>
-                <li><a href={openSecretsLink} target="_blank">Open Secrets Page</a></li>
-                <li><a href={voterlyLink} target="_blank">Voterly Page</a></li>
+                <li><a href={openSecretsLink} target="_blank">Open Secrets Page <Icon icon={externalLink} /></a></li>
+                <li><a href={voterlyLink} target="_blank">Voterly Page <Icon icon={externalLink} /></a></li>
+                <li><a href={govTrackLink} target="_blank">GovTrack  <Icon icon={externalLink} /></a></li>
             </ul>
         </div>
     );
 }
 
-
+// Independent Expenditures: Creates the list of committees that have supported or donated against a certain representative 
 function ExpendituresPie(props) {
     let exp = props.exp;
-    console.log(exp);
     let comitteesS = [];
     let committeesO = [];
     for(let i = 0; i < exp.results.length; i++) {
-        if(exp.results[i].support_or_oppose === 'S' && !comitteesS.includes(exp.results[i].fec_committee_name)) {
+        if(exp.results[i].support_or_oppose === 'S' & !comitteesS.includes(exp.results[i].fec_committee_name)) {
             comitteesS.push(exp.results[i].fec_committee_name);
-        } else if(exp.results[i].support_or_oppose === 'O' && !committeesO.includes(exp.results[i].fec_committee_name)) {
+        } else if(exp.results[i].support_or_oppose === 'O' & !committeesO.includes(exp.results[i].fec_committee_name)) {
             committeesO.push(exp.results[i].fec_committee_name);
         }
     }
@@ -315,6 +353,7 @@ function ExpendituresPie(props) {
     );
 }
 
+// Independent Expenditures: Creates the individual list items for Independent Expenditures List
 function ExpenditureListItem(props) {
     return (
         <li>{props.committee}</li>
