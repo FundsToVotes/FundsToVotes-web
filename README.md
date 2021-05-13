@@ -2,6 +2,8 @@
 
 _Informatics Capstone Project 2021 | University of Washington Information School_
 
+There is a gap between voters and politicians regarding their campaign finances. Where politicians get their money from tells you a lot about their policies and stances, which can in turn affect the average American citizen. Funds to Votes uses comprehensive data sourced from reliable APIs to present visualizations that help voters get accurate information on who is funding their representatives and how that affects them.
+
 ## Team Members
 
 - Grady Thompson (Project Manager, Generalist)
