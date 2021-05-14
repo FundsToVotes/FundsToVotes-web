@@ -1,3 +1,9 @@
+/* ****************************************************
+      
+    This file is responsible for creating the Take Action Page with Information about how to take action
+
+*****************************************************/
+
 import React from "react";
 
 function OurData() {

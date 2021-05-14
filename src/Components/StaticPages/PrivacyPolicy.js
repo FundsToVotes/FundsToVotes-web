@@ -1,3 +1,9 @@
+/* ****************************************************
+      
+    This file is responsible for creating our Privacy Policy page
+
+*****************************************************/
+
 import React from "react";
 
 function PrivacyPolicy() {

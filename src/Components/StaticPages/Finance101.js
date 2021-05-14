@@ -1,3 +1,9 @@
+/* ****************************************************
+      
+    This file is responsible for creating the Finance101 Page with basic Information about campaign finance
+
+*****************************************************/
+
 import React from 'react'
 
 class Finance101 extends React.Component {
