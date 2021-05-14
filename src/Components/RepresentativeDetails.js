@@ -8,12 +8,9 @@
 
 import { useEffect, useState } from "react";
 import Plot from 'react-plotly.js';
-<<<<<<< HEAD
 import {Link} from '@reach/router';
-=======
 import { Icon } from '@iconify/react';
 import externalLink from '@iconify-icons/feather/external-link';
->>>>>>> 3871b6c8d0df6b75f7461afb48a83eb671d3ee4c
 
 // Renders the Representative Page with the three visualizations 
 export default function RepresentativePage(props) {
