@@ -14,7 +14,7 @@ class Finance101 extends React.Component {
                 <h3>Are there limits?</h3>
                 <p>Yes, there are limits to how much an individual or political action committee may contribute to a candidate. For an individual the limit is $2,900 per election. That means that an individual could donate $2,900 to a candidate for a primary election, and if the candidate advances to the general election, an individual could donate another $2,900.</p>
                 <p>Political action committees (PACs) can donate up to $2,900 or $5,000 directly to a candidate, depending on the type of PAC.</p>
-                <p>Super PACs may accept unlimited contributions from individuals, corporations, labor organizations. However, Super PACs can only engage in independent expenditures (described below).</p>
+                <p>Super PACs may accept unlimited contributions from individuals, corporations, labor organizations. However, Super PACs can only engage in independent expenditures (described below). Unlike regular PACs, Super PACs cannot donate directly to a candidate.</p>
 
                 <h3>Can anyone find out who donated and how much they donated?</h3>
                 <p>Yes, federal candidates must file campaign finance reports indicating the name, address, date, and amount of each contribution. For contributions by individuals, their occupation and employer name will also be included. That information is public record - anyone can look it up.</p>

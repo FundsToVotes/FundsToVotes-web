@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Plot from 'react-plotly.js';
+import {Link} from '@reach/router';
 
 export default function RepresentativePage(props) {
     const [industries, setIndustries] = useState({industry:[], '@attributes':{cid: ''}});
@@ -108,12 +109,13 @@ export default function RepresentativePage(props) {
                 </div>
             </div>
             <div style={{ marginTop: '20px'}}>
-                <h3>Bills Recently Voted on</h3>
+                <h3>Bills Recently Voted On</h3>
                 <p>These are the recent bills that {offName} has voted on. The industry that the bill relates to may correlate with an industry that supports {offName}.</p>
                 <BillsList bil={bills} ind={listOfInd} type={type}/>
             </div>
             <div style={{ marginTop: '20px'}}>
-                <h3>{offName}'s Independent Expenditures</h3>
+                <h3>Independent Expenditures</h3>
+                <p>These groups spent money in support or opposition of {offName}. Learn more about independent expenditures on the <Link to="/finance-101">Campaign Finance 101 page.</Link></p>
                 <ExpendituresPie exp={expenditures} />
             </div>
             <div style={{ marginTop: '20px'}}>
