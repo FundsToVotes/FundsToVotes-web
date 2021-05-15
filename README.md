@@ -83,7 +83,7 @@ First, clone the repo to your local machine and follow the steps in the previous
 
 ## Future iSchool Capstone Team
 
-If you are a Capstone team at the UW iSchool and are interested in continuing this project, **please reach out** to us via email at hello@fundstovotes.info. We'd love to chat, provide advice, and assist with GitHub repo/DNS/hosting logistics!
+If you're a future iSchool Capstone team that is interested in continuing this project, **please reach out** to us via email at hello@fundstovotes.info. We'd love to chat, provide advice, and assist with GitHub repo/DNS/hosting logistics! You can come up with a list of new features or improvements you want to add (we have several ideas), and begin implementing them.
 
 ## Deployment
 
@@ -100,8 +100,22 @@ These are the main files for our website and what they do:
 
 ## Backend/Serverside Code
 
-We have a separate (currently private) repository for our backend/serverside code. Our serverside code is written in Go, and can be found in our [serverside repository](https://github.com/FundsToVotes/serverside). Extensive documentation for the backend of this project can also be found in this repo.
+We have a separate repository for our backend/serverside code. Our serverside code is written in Go, and can be found in our [serverside repository](https://github.com/FundsToVotes/serverside). Extensive documentation for the backend of this project can also be found in this repo.
 
 Our project's backend hosting includes a database and a custom API endpoint serving data accumulated through a variety of sources. This is currently being hosted on an Amason Web Services (AWS) EC2 instance under the FundsToVotes AWS acount.
 
-Instructions for modifying, running, and acquiring access credentials for the backend server can be found in the Serverside repo.
+Instructions for modifying, running, and acquiring access credentials for the backend server can be found in the Serverside repo, if you are a future Capstone team at the UW iSchool interested in continuing this project.
+
+## iSchool-specific Handoff Documentation
+
+### Notifying stakeholders
+
+All stakeholders, mostly user research participants, will be notified of the project's transition to open source and its continuing status online no later than May 21 (when development is complete).
+
+### Systems Collecting User Data
+
+None of our systems collected user data, so there are no such systems to turn off nor data to delete.
+
+### Shut Down All Cloud Infrastructure
+
+We will keep this site running online and provide maintence updates as needed, however we will not be actively developing new features effective May 21. Accounts will remain under the ownership of the Funds to Votes.
