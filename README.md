@@ -118,4 +118,4 @@ None of our systems collected user data, so there are no such systems to turn of
 
 ### Shut Down All Cloud Infrastructure
 
-We will keep this site running online and provide maintence updates as needed, however we will not be actively developing new features effective May 21. Accounts will remain under the ownership of the Funds to Votes.
+We will keep this site running online and provide maintenance updates as needed, however we will not be actively developing new features effective May 21. Accounts will remain under the ownership of the Funds to Votes.
