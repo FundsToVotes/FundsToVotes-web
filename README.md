@@ -41,7 +41,7 @@ REACT_APP_PROPUBLICA_CONGRESS_API_KEY=
 
 ## Wishlist
 
-Over the course of this project, we, the original team, recieved a lot of amazing ideas from the various people we spoke to for user testing. Unfortunately, we weren't able to impliment all of them. This is where you, a possible future contributer, can come in! The following 'Wishlist' contains everything we thought about developing, but ultimately, didn't have the time for. Feel free to use any or none of these ideas as a place to start when deciding how to build on what we've created.
+Over the course of this project, we, the original team, received a lot of amazing ideas from the various people we spoke to for user testing. Unfortunately, we weren't able to implement all of them. This is where you, a possible future contributor, can come in! The following 'Wishlist' contains everything we thought about developing, but ultimately, didn't have the time for. Feel free to use any or none of these ideas as a place to start when deciding how to build on what we've created.
 
 ### General Website Wishlist
 
@@ -59,23 +59,23 @@ Over the course of this project, we, the original team, recieved a lot of amazin
 - Ability to Sort Bills visualization by industry, view all bills by industry
     > We have an existing table that shows recently voted upon bills. It would be interesting to be able to sort this table and show only bills from certain industries
 - Ability to see where in the Republican party members fall
-    > One of our user testing contacts, Michael from Countable, noted that there's currently a large fracture within the Republican party between Trumpists and Non-Trump republicans. It might be interesting to see which republicans recieve money from Trump's PACs, and denote on republican party members whether they recieve money/support from Trump.
+    > One of our user testing contacts, Michael from Countable, noted that there's currently a large fracture within the Republican party between Trumpists and Non-Trump republicans. It might be interesting to see which republicans receive money from Trump's PACs, and denote on republican party members whether they receive money/support from Trump.
 - Endorsements
     > It could be interesting to see which groups/industries/unions endorse a candidate. Make a visualization that pulls data from [Ballotpedia](https://ballotpedia.org/United_States_Congress_elections,_2020)  to view who endorses a particular candidate.
 - Indicator of how long someone's been in power
     > One of our user testers pointed out that a person who's been in power for years, such as an incumbent candidate, is often endorsed/supported by groups who might not necessarily agree with them, but want to support a powerful representative. It might be interesting to see how long each representative has held their seat, or been in a position of power
 - Visualization of Bills Sponsored
-    > The bills that a representative is the "primary sponsor" of can be a really good indication of what policies they're actively pursuing and moving forward. To implement this, copy the existing serverside for the bills recently voted on visualization, and modify it to only view bills the representative has sponsored. You can either do this with a different API call to a different endpoint propublica endpoint specifically for bills sponsored (ideal method) or you can filter by bills where they are the primary_sponsor of the bill (quick and dirty method). Regardless, both the serverside and the clientside should be very similar to that of the bills recently voted on visualization
-- View commitees or subcomittees a member is a part of
-    > [Propublica's Members API](https://projects.propublica.org/api-docs/congress-api/members/) has an endpoint that shows which comittees a representative is a part of. It could be interesting to display these, and potentially highlight any which pertain to industries they've recieved money from.
+    > The bills that a representative is the "primary sponsor" of can be a really good indication of what policies they're actively pursuing and moving forward. To implement this, copy the existing serverside for the bills recently voted on visualization, and modify it to only view bills the representative has sponsored. You can either do this with a different API call to a different endpoint ProPublica endpoint specifically for bills sponsored (ideal method) or you can filter by bills where they are the primary_sponsor of the bill (quick and dirty method). Regardless, both the serverside and the clientside should be very similar to that of the bills recently voted on visualization
+- View committees or subcommittees a member is a part of
+    > [Propublica's Members API](https://projects.propublica.org/api-docs/congress-api/members/) has an endpoint that shows which committees a representative is a part of. It could be interesting to display these, and potentially highlight any which pertain to industries they've received money from.
 - Advanced: Web scraper to determine whether an industry is for a bill or against it
     > Determine some way of telling whether an industry supports or opposes a bill. For instance, if a bill on large corporate antitrust laws is passed, is it Pro-corporation or Anti-corporation? We've been told that some large companies release press statements on each relevant bill, you could potentially make a list of these large companies, then write a web scraper that finds these press statements, and uses natural language processing AI to determine whether the statement is positive or negative. Alternatively, it's possible that an API or data source that already does this exists, we just haven't found one.
 - Graph outlining the top 10 pac donations
-    > View the 10 largest or 10 most recent pac contributions to each representative. Made slightly tricky because there's a donation limit, but, opensecrets and other websites manage to do this somehow, so, there's probably a good way to view this
+    > View the 10 largest or 10 most recent pac contributions to each representative. Made slightly tricky because there's a donation limit, but, Open Secrets and other websites manage to do this somehow, so, there's probably a good way to view this
 - Graph or list of the top 10 individual donations
     > Same as the top 10 pac donations. Slightly tricky because there's a cap on how much individuals can donate, but other websites have these visualizations, so, there's probably a different way that they're counting the money.
 - Ability to see how representatives compare to both the average representative and the average representative of their party
-    > If Big Oil donates $10,000 to each representative, seeing that Jane McEnviromentalistRep has taken a $10,000 donation from Big Oil isn't all that significant. However, if Jane has taken a $500,000 donation while the average representative only gets $10,000, that data might be interesting to users
+    > If Big Oil donates $10,000 to each representative, seeing that Jane McEnvironmentalistRep has taken a $10,000 donation from Big Oil isn't all that significant. However, if Jane has taken a $500,000 donation while the average representative only gets $10,000, that data might be interesting to users
 
 ## Contributing
 
@@ -102,7 +102,7 @@ These are the main files for our website and what they do:
 
 We have a separate repository for our backend/serverside code. Our serverside code is written in Go, and can be found in our [serverside repository](https://github.com/FundsToVotes/serverside). Extensive documentation for the backend of this project can also be found in this repo.
 
-Our project's backend hosting includes a database and a custom API endpoint serving data accumulated through a variety of sources. This is currently being hosted on an Amason Web Services (AWS) EC2 instance under the FundsToVotes AWS acount.
+Our project's backend hosting includes a database and a custom API endpoint serving data accumulated through a variety of sources. This is currently being hosted on an Amazon Web Services (AWS) EC2 instance under the FundsToVotes AWS account.
 
 Instructions for modifying, running, and acquiring access credentials for the backend server can be found in the Serverside repo, if you are a future Capstone team at the UW iSchool interested in continuing this project.
 

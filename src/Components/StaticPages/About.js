@@ -5,8 +5,8 @@
 *****************************************************/
 
 import React from "react";
-// import Poster from "../../images/poster.svg";
 import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
+import imgHandDollarIcon from '../../images/hand_with_dollar_sign.png';
 import imgGrady from "../../images/Grady.jpg";
 import imgJay from "../../images/Jay.jpg";
 import imgHaykal from "../../images/Haykal.jpg";
@@ -19,26 +19,24 @@ function About() {
             <h2>About</h2>
             <br></br>
 
-            {/* <img src={Poster} alt="Funds to Votes poster. An interactive platform informing voters on how their representatives are funded. Problem: How might American voters become more informed with regard to campaign finance so that they can choose candidates in line with their values? Solution: Funds to Votes uses comprehensive data sourced from reliable APIs to present visualizations that help voters get accurate information on who is funding their representatives and how that affects them. Screenshots of home page, top 10 industries, recently voted bills, independent expenditures. Team members are Reyan Haji, Haykal Mubin, Grady Thompson, and Jay Houppermans."/> */}
+            <h3><img src={imgHandDollarIcon} alt="Hand with dollar sign icon" style={{ display: "inline-block" }} width="50px" />Funds to Votes: <em>Informing curious voters on their representatives' campaign finances</em></h3>
+            
+            <p>According to AP-NORC, 53% of Americans know nothing or very little about how money works in politics. After the Citizens United ruling allowed more money in politics, understanding campaign finance became more important than ever. Funds to Votes helps by displaying this data in a user friendly and beginner researcher friendly manner, allowing voters to make more informed decisions. Finally, in addition to helping ordinary citizens decide who to vote for, our product is designed to aid endorsement groups in their research. This helps them decide who to endorse, which enables voters to select candidates according to their values.</p>
 
-            {/* <h3>Description</h3> */}
-            <p>Since the Citizens United ruling which removed major campaign finance limitations, voters need insight into political candidate fundraising to inform their votes. Funds to Votes shares information about campaign finance records and recent votes of members of Congress in an easy-to-understand format and encourages users to learn more and take action. Research emphasized the needs of endorsement groups when evaluating candidates, and the resulting product serves NGOs and voters alike with a tool to evaluate elected members of Congress. Access to this information allows voters to select candidates in line with their values and hold them accountable once in office.</p>
+            <h3>Context</h3>
+            <li>In 2020, a total of <strong>$14 billion</strong> was spent on political campaigns. (That's the the entire GDP of Madagascar!)</li>
+            <li>Existing websites that show campaign finance data are <strong>too complex</strong> for a beginner user.</li>
+            <li>Voters want and need to know more about their representatives in an easy-to-understand way so they can make <strong>informed decisions</strong>.</li>
+            <br />
 
-            {/* <h3></h3>
+            <h3>Key Features</h3>
             <ul>
-                <li>Learn what top industires are donating to your members of Congress.</li>
-                <li>Identify your  bills your representative voted on.</li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul> */}
-
-            {/* <h3>Problem</h3>
-            <p>How might American voters become more informed with regards to campaign finance so that they can choose candidates in line with their values?</p>
-
-            <h3>Solution</h3>
-            <p>Funds to Votes uses comprehensive data sourced from reliable APIs to present visualizations that help voters get accurate information on who is funding their representatives and how that affects them.</p> */}
+                <li>Learn what top industries are donating to your representatives in the U.S. Congress.</li>
+                <li>Identify the bills your representative voted on and their positions.</li>
+                <li>See how your representatives voted on bills that correlate with a top industry they are funded by.</li>
+                <li>Get an overview of the campaign finance system.</li>
+                <li>Take action, such as by registering to vote or contacting your representatives.</li>
+            </ul>
 
             <h3>Team Members</h3>
             <MDBContainer>
@@ -63,10 +61,15 @@ function About() {
             </MDBContainer>
             <br />
 
-            <h3>About the Project</h3>
-            <p>This project was developed by students at the University of Washington Information School as part of the Infomatics program's 2021 Capstone.</p>
+            <h3>Project Status</h3>
+            <p>This project was developed by students at the University of Washington Information School as part of the Informatics program's 2021 Capstone.</p>
             <p>Email the project team at <a href="mailto:hello@fundstovotes.info">hello@fundstovotes.info</a>.</p>
-            <img src={imgiSchool} alt="University of Washington Information School logo" width="300px" style={{ display: "block", marginLeft: "auto", marginRight: "auto" }} />
+            <img src={imgiSchool} role="img" alt="University of Washington Information School logo" width="300px" style={{ display: "block", marginLeft: "auto", marginRight: "auto" }} />
+            <br />
+
+            <p>The project is now open sourced. Source code and documentation are available on <a href="https://github.com/FundsToVotes">GitHub</a>. Contributions are welcome.</p>
+
+            
         </div>
     );
 }
