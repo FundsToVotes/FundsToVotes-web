@@ -81,7 +81,7 @@ export default function RepresentativePage(props) {
                 (result) => {
                     console.log(result);
                     setExpenditures(result);
-                    return fetch('https://api.fundstovotes.info/billstest?member_id=' + memberID);
+                    return fetch('https://api.fundstovotes.info/bills?member_id=' + memberID);
                 }
             )
             .then(res => res.json())
