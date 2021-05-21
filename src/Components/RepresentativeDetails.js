@@ -13,7 +13,7 @@ import externalLink from '@iconify-icons/feather/external-link';
 
 // Renders the Representative Page with the three visualizations 
 export default function RepresentativePage(props) {
-    const [industries, setIndustries] = useState({industry:[], '@attributes':{cid: ''}});
+    const [industries, setIndustries] = useState({'industry':[], '@attributes':{cid: ''}});
     const [bills, setBills] = useState([]);
     const [expenditures, setExpenditures] = useState({results: []});
     let offName = props.location.state.currName;
@@ -25,20 +25,10 @@ export default function RepresentativePage(props) {
             break
         }
     }
-    let arrToEncode = offName.split(" ", 2);
-    let encodedName = arrToEncode[1] + ',' + arrToEncode[0];
-    useEffect(() => {
-        fetch('https://api.fundstovotes.info/topten?name=' + encodedName)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    console.log(result);
-                    setIndustries(result.top10IndustriesResponse);
-                }
-            )
-    }, [])
     let fecID = '';
     let memberID = '';
+    let crp_id = '';
+    let senClassYr = '';
     let type = 'senate';
     let typeStyled = 'US Senator';
     if(offObj['urls'][0].includes('house')) {
@@ -55,19 +45,29 @@ export default function RepresentativePage(props) {
             .then(res => res.json())
             .then(
                 (result) => {
+                    console.log(result);
                     let nameArray = offName.split(" ");
                     let offFName = nameArray[0];
                     let offLName = nameArray[nameArray.length - 1];
                     let indexOfOfficial = result['results'][0]['members'].findIndex(x => x.first_name === offFName & x.last_name === offLName);
                     memberID = result['results'][0]['members'][indexOfOfficial]['id'];
                     fecID = result['results'][0]['members'][indexOfOfficial]['fec_candidate_id'];
+                    crp_id = result['results'][0]['members'][indexOfOfficial]['crp_id'];
                     let senClass = result['results'][0]['members'][indexOfOfficial]['title'];
-                    let senClassYr = "2020";
+                    senClassYr = "2020";
                     if(senClass.includes("1st Class")) {
                         senClassYr = "2018";
                     } else if (senClass.includes("3rd Class")) {
                         senClassYr = "2016";
                     }
+                    return fetch('https://api.fundstovotes.info/topten?crp_id=' + crp_id)
+                }
+            )
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    setIndustries(result);
                     return fetch("https://api.propublica.org/campaign-finance/v1/" + senClassYr + "/candidates/" + fecID + "/independent_expenditures.json", {
                         method: "GET",
                         headers: {
@@ -93,7 +93,7 @@ export default function RepresentativePage(props) {
             )
     }, [])
     let listOfInd = industries.industry.map((item) => {
-        return item['@attributes']['industry_code'];
+        return item['industry_code'];
     })
     let partyColor = 'red';
     if(offObj.party === 'Democratic Party'){
@@ -144,10 +144,10 @@ function IndustriesChart(props) {
     let trace1 = {x:[], y:[], name:'Individual', type:'bar', marker:{color:'#90EE90'}}
     let trace2 = {x:[], y:[], name:'PACs', type:'bar', marker:{color:'#2E8B57'}}
     for(let i = 0; i < industries.length; i++) {
-        trace1.x[i] = industries[i]['@attributes']['industry_name']
-        trace2.x[i] = industries[i]['@attributes']['industry_name']
-        trace1.y[i] = industries[i]['@attributes']['indivs']
-        trace2.y[i] = industries[i]['@attributes']['pacs']
+        trace1.x[i] = industries[i]['industry_name']
+        trace2.x[i] = industries[i]['industry_name']
+        trace1.y[i] = industries[i]['indivs']
+        trace2.y[i] = industries[i]['pacs']
     }
     let data = [trace1, trace2];
 
@@ -196,8 +196,8 @@ function IndustryItem(props) {
     }
     return (
         <div>
-            <li className='hoverIndustry'>{industry['@attributes']['industry_name']}</li>
-            <p className='hideExamples'>Example Organizations: {companyEx[industry['@attributes']['industry_code'].split('')[0]]}</p>
+            <li className='hoverIndustry'>{industry['industry_name']}</li>
+            <p className='hideExamples'>Example Organizations: {companyEx[industry['industry_code'].split('')[0]]}</p>
         </div>
     );
 }
