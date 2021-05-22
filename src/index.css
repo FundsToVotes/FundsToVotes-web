@@ -34,3 +34,10 @@ a[target="_blank"]:after {
   height:1px;
   overflow:hidden;  
 } */
+
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {   
+  border-color: #638f3b;
+  box-shadow: 0 1px 1px #638f3b inset, 0 0 8px #638f3b;
+  outline: 0 none;
+}
+

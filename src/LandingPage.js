@@ -43,11 +43,11 @@ function AddressInput() {
         return <GoogleAPI address={address} />
     } else {
         return (
-            <div style={{ textAlign: 'center' }}>
+            <div style={{ textAlign: 'center', fontFamily: "Comfortaa, sans-serif" }}>
                 <form onSubmit={e => onSubmit(e)}>
                     <label>
-                        <input style={{ width: '600px' }} type="text" placeholder="Insert Address Here" address="address" onChange={e => setAddress(e.target.value)} />
-                        <input type="submit" value="Search" /><br />
+                        <input style={{ width: '450px', display: "inline-block", marginRight: "5px" }} class="form-control" type="text" placeholder="Insert Address Here" address="address" onChange={e => setAddress(e.target.value)} />
+                        <input type="submit" value="Search" class="btn btn-dark" style={{ backgroundColor: "#000000" }} /><br />
                         <p style={{ fontFamily: "Comfortaa, sans-serif" }} >We don't save your information. See our <Link to="/privacy-policy">Privacy Policy</Link>.</p>
                     </label>
                 </form>
