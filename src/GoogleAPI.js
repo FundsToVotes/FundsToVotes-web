@@ -50,11 +50,11 @@ export function GoogleAPI(props) {
     }, [])
 
     return (
-        <div>
+        <div style={{ fontFamily: "Comfortaa, sans-serif"}}>
             {officials['nameList'].map(name => (
-                <MDBCard>
+                <MDBCard style={{ marginBottom: "10px" }}>
                     <MDBCardBody>
-                        <MDBCardTitle tag="h3" className="h5">{name}</MDBCardTitle>
+                        <MDBCardTitle tag="h3" className="h5" style={{ fontWeight: "700" }}>{name}</MDBCardTitle>
                         <MDBCardText>U.S. Congress</MDBCardText>
                         <MDBBtn style={{ backgroundColor: "#212121" }} onClick={() => { navigate("/representative-details", { state: { currName: name, off: officials } }) }}>Learn More</MDBBtn>
                     </MDBCardBody>

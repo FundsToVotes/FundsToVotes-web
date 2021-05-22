@@ -22,7 +22,7 @@ export function LandingPage() {
 // Creates the Title for the landing page
 function Title() {
     return (
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center', fontFamily: "Comfortaa, sans-serif" }}>
             <h2 style={{ fontSize: 52, color: '#516F2A' }}>Who Funds Your Representatives?</h2>
             <p>Enter your address below to what industries are donating to your representatives and how they voted on relevant issues.</p>
         </div>
@@ -43,12 +43,12 @@ function AddressInput() {
         return <GoogleAPI address={address} />
     } else {
         return (
-            <div style={{ textAlign: 'center' }}>
+            <div style={{ textAlign: 'center', fontFamily: "Comfortaa, sans-serif" }}>
                 <form onSubmit={e => onSubmit(e)}>
                     <label>
-                        <input style={{ width: '600px' }} type="text" placeholder="Insert Address Here" address="address" onChange={e => setAddress(e.target.value)} />
-                        <input type="submit" value="Search" /><br />
-                        <p>We don't save your information. See our <Link to="/privacy-policy">Privacy Policy</Link>.</p>
+                        <input style={{ width: '450px', display: "inline-block", marginRight: "5px" }} class="form-control" type="text" placeholder="Insert Address Here" address="address" onChange={e => setAddress(e.target.value)} />
+                        <input type="submit" value="Search" class="btn btn-dark" style={{ backgroundColor: "#000000" }} /><br />
+                        <p style={{ fontFamily: "Comfortaa, sans-serif" }} >We don't save your information. See our <Link to="/privacy-policy">Privacy Policy</Link>.</p>
                     </label>
                 </form>
             </div>
