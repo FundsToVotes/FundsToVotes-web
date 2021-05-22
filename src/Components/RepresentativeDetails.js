@@ -102,8 +102,8 @@ export default function RepresentativePage(props) {
     }
 
     return (
-        <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '20px', backgroundColor: 'white', padding: '30px', marginTop: '30px'}}>
-            <h1  >{offName}</h1>
+        <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '20px', backgroundColor: 'white', padding: '30px', marginTop: '30px', fontFamily: "Comfortaa, sans-serif" }}>
+            <h1 style={{ fontWeight: "700" }} >{offName}</h1>
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                 <p style={{ display: 'inline', color: partyColor}}>{offObj.party}</p>
                 <p style={{ display: 'inline'}}>{typeStyled}</p>
@@ -112,7 +112,7 @@ export default function RepresentativePage(props) {
             </div>
             <img src={offObj.photoUrl} alt="A photograph of the representative" style={{ display: 'none'}}/>
             <div style={{ marginBotton: '20px'}}>
-                <h3>Top 10 Industries Funding This Representative</h3>
+                <h3 style={{ fontWeight: "700" }}>Top 10 Industries Funding This Representative</h3>
                 <p>These industries are top contributors to {offName}'s campaign by individuals who work in those industries or Political Action Committees (PACs) in that industry.</p>
                 <div style={{ display: 'flex', flexDirection: 'row'}}>
                     <IndustriesChart ind={industries.industry} />
@@ -120,17 +120,17 @@ export default function RepresentativePage(props) {
                 </div>
             </div>
             <div style={{ marginTop: '20px'}}>
-                <h3>Bills Recently Voted On</h3>
+                <h3 style={{ fontWeight: "700" }}>Bills Recently Voted On</h3>
                 <p>These are the recent bills that {offName} has voted on. The industry that the bill relates to may correlate with an industry that supports {offName}.</p>
                 <BillsList bil={bills} ind={listOfInd} type={type}/>
             </div>
             <div style={{ marginTop: '20px'}}>
-                <h3>Independent Expenditures</h3>
+                <h3 style={{ fontWeight: "700" }}>Independent Expenditures</h3>
                 <p>These groups spent money in support or opposition of {offName}. Learn more about independent expenditures on the <Link to="/finance-101">Campaign Finance 101 page.</Link></p>
                 <ExpendituresPie exp={expenditures} />
             </div>
             <div style={{ marginTop: '20px'}}>
-                <h3>Find Out More About {offName}'s Funding</h3>
+                <h3 style={{ fontWeight: "700" }}>Find Out More About {offName}'s Funding</h3>
                 <ExtendedInfoOnRep cid={industries['@attributes']['cid']} name={offName} />
             </div>
             <div style={{ marginTop: '20px', textAlign: 'center'}}>

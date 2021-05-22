@@ -6,7 +6,7 @@ import "../index.css";
 
 function Header() {
     return (
-        <Navbar style={{ backgroundColor: '#689f38', paddingTop: "0px", paddingLeft: "20%", paddingRight: "20%", position: "sticky", top:"0", zIndex: "10000" }} expand="lg">
+        <Navbar style={{ backgroundColor: '#689f38', paddingTop: "0px", paddingLeft: "20%", paddingRight: "20%", position: "sticky", top:"0", zIndex: "10000", fontFamily: "Comfortaa, sans-serif" }} expand="lg">
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="justify-content-around" style={{ width: "100%" }}>
