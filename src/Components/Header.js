@@ -19,7 +19,7 @@ function Header() {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            <div style={{ backgroundColor: "gold", display: "block", textAlign: "center", fontFamily: "Comfortaa, sans-serif" }} >This website is no longer being developed. Some features have been removed or may no longer work.</div>
+            <div style={{ backgroundColor: "gold", display: "block", textAlign: "center", fontFamily: "Comfortaa, sans-serif" }}>This website is no longer being maintained. Interactive features have been removed, but you may still explore the static informational pages.</div>
         </div>
     );
 }

@@ -16,7 +16,6 @@ import PrivacyPolicy from "./Components/StaticPages/PrivacyPolicy";
 import NotFound from "./Components/StaticPages/NotFound";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
-import RepresentativeDetails from "./Components/RepresentativeDetails";
 import LandingPage from "./LandingPage";
 
 import './App.css';
@@ -34,7 +33,6 @@ function App() {
                 <TakeAction path="/take-action" />
                 <OurData path="/our-data" />
                 <About path="/about" />
-                <RepresentativeDetails path="/representative-details" />
                 <PrivacyPolicy path="/privacy-policy" />
                 <NotFound default />
             </Router>

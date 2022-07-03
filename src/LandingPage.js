@@ -5,7 +5,6 @@
 
 *****************************************************/
 
-import { GoogleAPI } from './GoogleAPI';
 import { useState } from 'react';
 import { Link } from '@reach/router';
 
@@ -40,13 +39,13 @@ function AddressInput() {
     }
 
     if (submitted) {
-        return <GoogleAPI address={address} />
+        return
     } else {
         return (
             <div style={{ textAlign: 'center', fontFamily: "Comfortaa, sans-serif" }}>
                 <form onSubmit={e => onSubmit(e)}>
-                    <input style={{ width: '450px', display: "inline-block", marginRight: "5px" }} class="form-control" type="text" placeholder="Insert Address Here" address="address" onChange={e => setAddress(e.target.value)} />
-                    <input type="submit" value="Search" class="btn btn-dark" style={{ backgroundColor: "#000000" }} /><br />
+                    <input style={{ width: '450px', display: "inline-block", marginRight: "5px" }} class="form-control" type="text" placeholder="Insert Address Here" address="address" onChange={e => setAddress(e.target.value)} disabled />
+                    <input type="submit" value="Search" class="btn btn-dark" style={{ backgroundColor: "#000000" }} disabled /><br />
                     <p style={{ fontFamily: "Comfortaa, sans-serif" }} >We don't save your information. See our <Link to="/privacy-policy" className='internalLink'>Privacy Policy</Link>.</p>
                 </form>
             </div>
