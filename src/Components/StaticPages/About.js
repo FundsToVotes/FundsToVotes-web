@@ -15,7 +15,7 @@ import imgiSchool from "../../images/iSchoolPrimary_RGB_Black.svg";
 
 function About() {
     return (
-        <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '20px', backgroundColor: 'white', padding: '30px', marginTop: '30px', fontFamily: "Comfortaa, sans-serif" }}>
+        <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '20px', backgroundColor: 'white', padding: '30px', marginTop: '30px', fontFamily: "Comfortaa, sans-serif" }} role="main">
             <h2 style={{ fontWeight: "700" }}>About</h2>
             <br></br>
 
@@ -63,11 +63,12 @@ function About() {
 
             <h3 style={{ fontWeight: "700" }}>Project Status</h3>
             <p>This project was developed by students at the University of Washington Information School as part of the Informatics program's 2021 Capstone.</p>
-            <p>Email the project team at <a href="mailto:hello@fundstovotes.info">hello@fundstovotes.info</a>.</p>
+            <p>Email the project team at <a href="mailto:hello@fundstovotes.info" className="externalLink">hello@fundstovotes.info</a>.</p>
+            <a href="https://ischool.uw.edu/capstone/projects/2021/funds-votes-informing-curious-voters-their-representatives-campaign-finances" className="externalLink">View this project on the iSchool Capstone website.</a>
             <img src={imgiSchool} role="img" alt="University of Washington Information School logo" width="300px" style={{ display: "block", marginLeft: "auto", marginRight: "auto" }} />
             <br />
 
-            <p>The project is now open sourced. Source code and documentation are available on <a href="https://github.com/FundsToVotes">GitHub</a>. Contributions are welcome.</p>
+            <p>The project is now open sourced. Source code and documentation are available on <a href="https://github.com/FundsToVotes" className="externalLink">GitHub</a>. Contributions are welcome.</p>
 
             
         </div>

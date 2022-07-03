@@ -11,7 +11,7 @@ import GoogleLogo from "../../images/Google_2015_logo.svg";
 
 function OurData() {
     return (
-        <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '20px', backgroundColor: 'white', padding: '30px', marginTop: '30px', fontFamily: "Comfortaa, sans-serif" }}>
+        <div style={{ display: "block", margin: "auto", width: '75%', paddingTop: '20px', backgroundColor: 'white', padding: '30px', marginTop: '30px', fontFamily: "Comfortaa, sans-serif" }} role="main">
             <h2 style={{ fontWeight: "700" }}>Our Data</h2>
             <p>Funds to Votes relies on free, publicly-available APIs. We thank the sponsors and maintainers of these APIs for supporting civic technology.</p>
 
